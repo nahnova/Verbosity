@@ -55,9 +55,9 @@
     <Compile Include="InventoryProducts\Categories\VendorsRepo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IMS.DataAccess\IMS.DataAccess.csproj">
+    <ProjectReference Include="..\FBS.DataAccess\FBS.DataAccess.csproj">
       <Project>{5b09d955-3e93-4eb5-a407-7fdd97675611}</Project>
-      <Name>IMS.DataAccess</Name>
+      <Name>FBS.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\IMS.Entity\IMS.Entity.csproj">
       <Project>{ed38eb38-60ae-4512-86e8-9d9d8894321b}</Project>

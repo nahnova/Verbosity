@@ -7,8 +7,8 @@
     <ProjectGuid>{5B09D955-3E93-4EB5-A407-7FDD97675611}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IMS.DataAccess</RootNamespace>
-    <AssemblyName>IMS.DataAccess</AssemblyName>
+    <RootNamespace>FBS.DataAccess</RootNamespace>
+    <AssemblyName>FBS.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -63,7 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InventoryProducts\InventoryDBDataAccess.cs" />
+    <Compile Include="FeedbackCollection\FeedbackCollectionDBDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

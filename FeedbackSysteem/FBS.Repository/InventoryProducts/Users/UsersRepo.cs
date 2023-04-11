@@ -9,7 +9,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using IMS.DataAccess;
+using FBS.DataAccess;
 using IMS.Entity.InventoryProducts;
 
 namespace IMS.Repository

@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IMS.DataAccess;
+using FBS.DataAccess;
 using IMS.Entity.InventoryProducts;
 
 namespace IMS.Repository
