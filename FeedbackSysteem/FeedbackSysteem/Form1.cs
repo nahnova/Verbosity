@@ -15,7 +15,7 @@ namespace FeedbackSysteem
         private void button1_Click(object sender, EventArgs e)
         {
             Home home = new Home();
-            Console.WriteLine()
+            Console.WriteLine();
            home.ShowDialog();
         }
     }
