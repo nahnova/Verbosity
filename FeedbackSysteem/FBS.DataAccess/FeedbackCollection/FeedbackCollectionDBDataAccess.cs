@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IMS.DataAccess
+namespace FBS.DataAccess
 {
-    public class InventoryDBDataAccess
+    public class FeedbackCollectionDBDataAccess
     {
         private SqlConnection sqlcon;
         public SqlConnection Sqlcon
@@ -40,9 +40,9 @@ namespace IMS.DataAccess
         }
 
         //internal DataTable dt
-        public InventoryDBDataAccess()
+        public FeedbackCollectionDBDataAccess()
         {
-            this.Sqlcon = new SqlConnection(@"Server=localhost;Database=inventoryDB;Trusted_Connection=True;");
+            this.Sqlcon = new SqlConnection(@"Data Source=DESKTOP-FS0T5UA;Initial Catalog=feedbackDB;Integrated Security=True");
             Sqlcon.Open();
         }
 
