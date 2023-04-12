@@ -66,22 +66,22 @@ _TODO: Provide a link to the detailed documentation._
 
 In order to maintain a clean and well-organized codebase for the Verbosity project, we require all contributors to follow these commit guidelines. This will help ensure a smooth development process and easy collaboration among team members.
 
-## Branching
+### Branching
 
 1. Always create a new branch from the `staging` branch.
 2. The branch name should be the name of the linear ticket you are working on, e.g., `LIN-123`.
 
-## Committing
+### Committing
 
 1. Commit messages should be clear, concise, and written in the imperative form, e.g., "Add new feature", not "Adding new feature" or "Added new feature".
 2. Use the linear ticket name as a prefix in your commit messages, e.g., `LIN-123: Add new feature`.
 
-## Pull Requests
+### Pull Requests
 
 1. When your work on the branch is complete and tested, create a pull request (PR) targeting the `staging` branch.
 2. PRs should have a descriptive title and a detailed description of the changes made.
 
-## Review and Merge Process
+### Review and Merge Process
 
 1. For changes to be merged into `staging`, at least one team member must review and approve the PR.
 2. For changes to be merged into `main`, at least two team members must review and approve the PR.
