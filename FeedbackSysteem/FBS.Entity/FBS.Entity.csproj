@@ -7,8 +7,8 @@
     <ProjectGuid>{ED38EB38-60AE-4512-86E8-9D9D8894321B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IMS.Entity</RootNamespace>
-    <AssemblyName>IMS.Entity</AssemblyName>
+    <RootNamespace>FBS.Entity</RootNamespace>
+    <AssemblyName>FBS.Entity</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
