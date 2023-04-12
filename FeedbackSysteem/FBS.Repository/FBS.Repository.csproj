@@ -7,8 +7,8 @@
     <ProjectGuid>{EA6E6A23-9686-4593-90CC-5463100B2BB5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IMS.Repository</RootNamespace>
-    <AssemblyName>IMS.Repository</AssemblyName>
+    <RootNamespace>FBS.Repository</RootNamespace>
+    <AssemblyName>FBS.Repository</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -59,13 +59,13 @@
       <Project>{5b09d955-3e93-4eb5-a407-7fdd97675611}</Project>
       <Name>FBS.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IMS.Entity\IMS.Entity.csproj">
+    <ProjectReference Include="..\FBS.Entity\FBS.Entity.csproj">
       <Project>{ed38eb38-60ae-4512-86e8-9d9d8894321b}</Project>
-      <Name>IMS.Entity</Name>
+      <Name>FBS.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IMS.Framework\IMS.Framework.csproj">
+    <ProjectReference Include="..\FBS.Framework\FBS.Framework.csproj">
       <Project>{2db543f6-afb8-40ca-b0ea-39f18f0a9cc4}</Project>
-      <Name>IMS.Framework</Name>
+      <Name>FBS.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

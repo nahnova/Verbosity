@@ -9,10 +9,10 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using IMS.DataAccess;
-using IMS.Entity.InventoryProducts;
+using FBS.DataAccess;
+using FBS.Entity.InventoryProducts;
 
-namespace IMS.Repository
+namespace FBS.Repository
 {
     List<Student> students = new List<Student>();
     public class UsersRepo
