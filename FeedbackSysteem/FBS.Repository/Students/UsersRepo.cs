@@ -10,20 +10,18 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using FBS.DataAccess;
-using FBS.Entity.InventoryProducts;
 
 namespace FBS.Repository
 {
-    List<Student> students = new List<Student>();
     public class UsersRepo
     {
-        private InventoryDBDataAccess iDB{ get; set; }
+        private FeedbackCollectionDBDataAccess iDB   { get; set; }
+        List<Student> students = new List<Student>();
 
         public UsersRepo()
         {
-            this.iDB = new InventoryDBDataAccess();
+            this.iDB = new FeedbackCollectionDBDataAccess();
         }
-
 
         //Add Student
         public void AddStudent(int iD, string firstName, string lastName, string email, string gender,string password)
@@ -31,8 +29,6 @@ namespace FBS.Repository
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
-                connection.Open();
                 string sql = "INSERT INTO Student (id,firstName,lastName,email,gender,password) VALUES(@id,@firstName,@lastName,@email,@gender,@password)";
 
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
@@ -56,7 +52,7 @@ namespace FBS.Repository
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = FeedbackCollectionDBDataAccess();
                 connection.Open();
                 string sql = "INSERT INTO Teacher (id,firstName,lastName,email,gender) VALUES(@id,@firstName,@lastName,@email,@gender)";
 
