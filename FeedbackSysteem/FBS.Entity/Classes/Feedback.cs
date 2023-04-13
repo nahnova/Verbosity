@@ -8,7 +8,7 @@ public class Feedback
 
     public string Course { get; set; }
 
-	public string Feedback { get; set; }
+	public string GivenFeedback { get; set; }
 
 	public string Type { get; set; }
 
@@ -21,7 +21,7 @@ public class Feedback
 		ID = iD;
 		Date = date;
 		Course = course;
-		Feedback = feedback;
+		GivenFeedback = feedback;
 		Type = type;
 		SingleTeacher = teacher;
 		SingleStudent = student;
