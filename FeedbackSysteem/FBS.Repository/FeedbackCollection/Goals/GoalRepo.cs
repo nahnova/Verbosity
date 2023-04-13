@@ -10,7 +10,6 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using FBS.DataAccess;
-using FBS.Entity.InventoryProducts;
 
 namespace FBS.Repository
 {
@@ -18,14 +17,13 @@ namespace FBS.Repository
     public class GoalRepo
 
     {
-        private InventoryDBDataAccess iDB{ get; set; }
+        private FeedbackCollectionDBDataAccess iDB { get; set; }
 
         public GoalRepo()
 
         {
-            this.iDB = new InventoryDBDataAccess();
+            this.iDB = new FeedbackCollectionDBDataAccess();
         }
-        FeedbackCollectionDBDataAccess()
         public List<Goal> goals = new List<Goal>();
 
 
@@ -71,13 +69,13 @@ namespace FBS.Repository
                     {
                         while (dataReader.Read())
                         {
-                            goals.Add(new Goal(Int32.Parse(dataReader[0].ToString())))
-                                                               , Int32.Parse(dataReader[1].ToString())
-                                                               , dataReader[2].ToString()
-                                                               , dataReader[3].ToString()
-                                                               , dataReader[4].ToString()
-                                                               )
-                                        );
+                            goals.Add(new Goal(
+                            Int32.Parse(dataReader[0].ToString()),  // set the ID property of the Goal object to the first value in the dataReader array, converted to an integer
+                            Int32.Parse(dataReader[1].ToString()),  // set the CategoryID property of the Goal object to the second value in the dataReader array, converted to an integer
+                            dataReader[2].ToString(),               // set the Description property of the Goal object to the third value in the dataReader array, as a string
+                            dataReader[3].ToString(),               // set the CompletionDate property of the Goal object to the fourth value in the dataReader array, as a string
+                            dataReader[4].ToString()                // set the Completed property of the Goal object to the fifth value in the dataReader array, as a string, which will be converted to a boolean value later
+                            ));
                         }
                     }
                 }
@@ -87,7 +85,7 @@ namespace FBS.Repository
         /*==========Get a single goal from the database==========*/
         public Goal GetSingleGoalByID(int id)
         {
-            Goal goal = new Goal(0, 0,"","","");
+            Goal goal = new Goal(0, 0, "", "", "");
 
             using (SqlConnection cnn = new SqlConnection(connectionString))
             {
@@ -107,7 +105,7 @@ namespace FBS.Repository
                             goal.studentID = Int32.Parse(dataReader[1].ToString());
                             goal.priority = dataReader[2].ToString();
                             goal.goal = dataReader[3].ToString();
-                            goal.time = dataReader[4].ToString();                          
+                            goal.time = dataReader[4].ToString();
                         }
                     }
                 }
@@ -151,7 +149,7 @@ namespace FBS.Repository
                 {
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@studentID", studentId);
-                    cmd.Parameters.AddWithValue("@priority",priority );
+                    cmd.Parameters.AddWithValue("@priority", priority);
                     cmd.Parameters.AddWithValue("@goal", goal);
                     cmd.Parameters.AddWithValue("@time", time);
                     cmd.ExecuteNonQuery();
@@ -164,5 +162,5 @@ namespace FBS.Repository
             }
             finally { connection.Dispose(); }
         }
-    }   
+    }
 }

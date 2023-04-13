@@ -10,7 +10,6 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using FBS.DataAccess;
-using FBS.Entity.InventoryProducts;
 
 namespace FBS.Repository
 {
@@ -18,14 +17,13 @@ namespace FBS.Repository
     public class SubGoalRepo
 
     {
-        private InventoryDBDataAccess iDB{ get; set; }
+        private FeedbackCollectionDBDataAccess iDB{ get; set; }
 
         public SubGoalRepo()
 
         {
-            this.iDB = new InventoryDBDataAccess();
+            this.iDB = new FeedbackCollectionDBDataAccess();
         }
-        FeedbackCollectionDBDataAccess()
         public List<SubGoal> subGoals = new List<SubGoal>();
 
 
@@ -35,7 +33,7 @@ namespace FBS.Repository
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
                 string sql = "INSERT INTO SubGoal (id,goalId,subGoal) VALUES(@id,@goalId,@subGoal)";
 
@@ -57,11 +55,11 @@ namespace FBS.Repository
         {
             subGoals.Clear();
 
-            using (SqlConnection cnn = new SqlConnection(connectionString))
+            using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cnn.ConnectionString = connectionString;
+                    cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
                     cmd.CommandText = "SELECT id,goalId,subGoal FROM SubGoal ORDER BY id";
@@ -69,27 +67,29 @@ namespace FBS.Repository
                     {
                         while (dataReader.Read())
                         {
-                            goals.Add(new Goal(Int32.Parse(dataReader[0].ToString())))
-                                                               , dataReader[1].ToString()
-                                                               , dataReader[2].ToString()
-                                                               )
-                                        );
+                            int iD = Int32.Parse(dataReader[0].ToString());
+                            int goalIdInt = Int32.Parse(dataReader[1].ToString());
+                            Goal goalId = GetGoalById(goalIdInt); // Replace with the appropriate method to get a Goal instance by Id
+                            string subgoal = dataReader[2].ToString();
+
+                            subGoals.Add(new SubGoal(iD, goalId, subgoal));
                         }
                     }
                 }
             }
         }
 
+
         /*==========Get a single Subgoal from the database==========*/
         public SubGoal GetSingleSubGoalByID(int id)
         {
             SubGoal subGoal = new SubGoal(0,0,"");
 
-            using (SqlConnection cnn = new SqlConnection(connectionString))
+            using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cnn.ConnectionString = connectionString;
+                    cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
                     cmd.CommandText = "SELECT id,goalId,subGoal FROM SubGoal WHERE id = @id";
@@ -115,7 +115,7 @@ namespace FBS.Repository
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
                 string sql = "DELETE SubGoal WHERE id = @id";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
@@ -138,7 +138,7 @@ namespace FBS.Repository
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
                 string sql = "UPDATE SubGoal SET id = @id,goalId = @goalId,subGoal = @subGoal";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
