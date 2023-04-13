@@ -10,7 +10,6 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using FBS.DataAccess;
-using FBS.Entity.InventoryProducts;
 
 namespace FBS.Repository
 {
@@ -18,14 +17,13 @@ namespace FBS.Repository
     public class FeedbackRepo
 
     {
-        private InventoryDBDataAccess iDB{ get; set; }
+        private FeedbackCollectionDBDataAccess iDB{ get; set; }
 
         public FeedbackRepo()
 
         {
-            this.iDB = new InventoryDBDataAccess();
+            this.iDB = new FeedbackCollectionDBDataAccess();
         }
-        FeedbackCollectionDBDataAccess()
         public List<Feedback> feedbackList = new List<Feedback>();
 
 
@@ -35,7 +33,7 @@ namespace FBS.Repository
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
                 string sql = "INSERT INTO Feedback (id,teacherId,studentId,date,course,feedback,type) VALUES(@id,@teacherId,@studentId,@date,@course,@feedback,@type)";
 
@@ -61,11 +59,11 @@ namespace FBS.Repository
         {
             feedbackList.Clear();
 
-            using (SqlConnection cnn = new SqlConnection(connectionString))
+            using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cnn.ConnectionString = connectionString;
+                    cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
                     cmd.CommandText = "SELECT id, teacherId, studentId, date,course,feedback,type FROM Feedback ORDER BY id";
@@ -73,31 +71,32 @@ namespace FBS.Repository
                     {
                         while (dataReader.Read())
                         {
-                            feedbackList.Add(new Feedback(Int32.Parse(Int32.Parse(dataReader[0].ToString()))
-                                                               , Int32.Parse(dataReader[1].ToString())
-                                                               , Int32.Parse(dataReader[2].ToString())
-                                                               , DateTime.Parse(dataReader[3].ToString())
-                                                               , dataReader[4].ToString()
-                                                               , dataReader[5].ToString()
-                                                               , dataReader[6].ToString()
-                                                               )
-                                        );
+                            feedbackList.Add(new Feedback(
+                                Int32.Parse(dataReader[0].ToString()), // set the ID property of the Feedback object to the first value in the dataReader array, converted to an integer
+                                DateTime.Parse(dataReader[3].ToString()), // set the Date property of the Feedback object to the fourth value in the dataReader array, converted to a DateTime object
+                                dataReader[4].ToString(), // set the Course property of the Feedback object to the fifth value in the dataReader array, as a string
+                                dataReader[5].ToString(), // set the GivenFeedback property of the Feedback object to the sixth value in the dataReader array, as a string
+                                dataReader[6].ToString(), // set the Type property of the Feedback object to the seventh value in the dataReader array, as a string
+                                new Teacher(Int32.Parse(dataReader[1].ToString()), "", "", "", ""), // set the SingleTeacher property of the Feedback object to a new Teacher object with the second value in the dataReader array as its ID, converted to an integer
+                                new Student(Int32.Parse(dataReader[2].ToString()), "", "", "","","") // set the SingleStudent property of the Feedback object to a new Student object with the third value in the dataReader array as its ID, converted to an integer
+                            ));
                         }
                     }
                 }
             }
         }
 
+
         /*==========Get a single feedback from the database==========*/
         public Feedback GetSingleFeedbackByID(int id)
         {
-            Feedback feedback = new Feedback(0, 0, 0, 01-01-2023, "", "","");
+            Feedback feedback = new Feedback(0, new DateTime(2023, 1, 1), "", "", "", new Teacher(0, "", "", "", ""), new Student(0, "", "", "","",""));
 
-            using (SqlConnection cnn = new SqlConnection(connectionString))
+            using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cnn.ConnectionString = connectionString;
+                    cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
                     cmd.CommandText = "SELECT id, teacherId, studentId, date,course,feedback,type FROM Feedback WHERE id = @id";
@@ -110,10 +109,10 @@ namespace FBS.Repository
                             feedback.ID = Int32.Parse(dataReader[0].ToString());
                             feedback.Date = DateTime.Parse(dataReader[3].ToString());
                             feedback.Course = dataReader[4].ToString();
-                            feedback.Feedback = dataReader[5].ToString();
+                            feedback.GivenFeedback = dataReader[5].ToString();
                             feedback.Type = dataReader[6].ToString();
                             feedback.SingleTeacher.ID = Int32.Parse(dataReader[1].ToString());
-                            feedback.SingleStudent,ID = Int32.Parse(dataReader[2].ToString());
+                            feedback.SingleStudent.ID = Int32.Parse(dataReader[2].ToString());
                            
                         }
                     }
@@ -128,7 +127,7 @@ namespace FBS.Repository
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
                 string sql = "DELETE Feedback WHERE id = @id";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
@@ -151,7 +150,7 @@ namespace FBS.Repository
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
                 string sql = "UPDATE Feedback SET id = @id,date = @date,course = @course,feedback= @feedback,type = @type,teacherId= @teacherId,studentId = @studentId WHERE id = @id";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))

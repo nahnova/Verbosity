@@ -10,22 +10,20 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using FBS.DataAccess;
-using FBS.Entity.InventoryProducts;
 
 namespace FBS.Repository
 {
 
     public class StudentsRepo
     {
-        private InventoryDBDataAccess iDB{ get; set; }
+        private FeedbackCollectionDBDataAccess iDB{ get; set; }
 
         public StudentsRepo()
         {
-            this.iDB = new InventoryDBDataAccess();
+            this.iDB = new FeedbackCollectionDBDataAccess();
         }
-        FeedbackCollectionDBDataAccess()
-        public List<Student> students = new List<Student>();
 
+        public List<Student> students = new List<Student>();
         //Add Student
         public void AddStudent(int iD, string firstName, string lastName, string email, string gender,string password)
         {
@@ -69,7 +67,7 @@ namespace FBS.Repository
                     {
                         while (dataReader.Read())
                         {
-                            students.Add(new Student(Int32.Parse(Int32.Parse(dataReader[0].ToString()))
+                            students.Add(new Student(Int32.Parse((dataReader[0].ToString()))
                                                                , dataReader[1].ToString()
                                                                , dataReader[2].ToString()
                                                                , dataReader[3].ToString()
@@ -86,7 +84,7 @@ namespace FBS.Repository
         /*==========Get a single student from the database==========*/
         public Student GetSinglestudentByID(int id)
         {
-            Student student = new Product("", "", "", "", "", "");
+            Student student = new Student(0, "", "", "", "", "");
 
             using (SqlConnection cnn = new SqlConnection(connectionString))
             {
@@ -102,7 +100,7 @@ namespace FBS.Repository
                     {
                         while (dataReader.Read())
                         {
-                            student.ID = dataReader[0];
+                            student.ID = Int32.Parse(dataReader[0].ToString());
                             student.FirstName = dataReader[1].ToString();
                             student.LastName = dataReader[2].ToString();
                             student.Email = dataReader[3].ToString();
