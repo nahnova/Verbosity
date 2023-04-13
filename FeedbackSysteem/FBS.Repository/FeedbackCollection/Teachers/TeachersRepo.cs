@@ -14,51 +14,26 @@ using FBS.Entity.InventoryProducts;
 
 namespace FBS.Repository
 {
-    List<Student> students = new List<Student>();
-    public class UsersRepo
+    public class TeachersRepo
     {
         private InventoryDBDataAccess iDB{ get; set; }
 
-        public UsersRepo()
+        public TeachersRepo()
         {
             this.iDB = new InventoryDBDataAccess();
         }
+        FeedbackCollectionDBDataAccess()
+        public List<Teacher> teachers = new List<Teacher>();
 
-
-        //Add Student
-        public void AddStudent(int iD, string firstName, string lastName, string email, string gender,string password)
-        {
-            SqlConnection connection = new SqlConnection();
-            try
-            {
-                connection.ConnectionString = connectionString;
-                connection.Open();
-                string sql = "INSERT INTO Student (id,firstName,lastName,email,gender,password) VALUES(@id,@firstName,@lastName,@email,@gender,@password)";
-
-                using (SqlCommand cmd = new SqlCommand(sql, connection))
-                {
-                    cmd.Parameters.AddWithValue("@id", iD);
-                    cmd.Parameters.AddWithValue("@firstName", firstName);
-                    cmd.Parameters.AddWithValue("@lastName", lastName);
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@gender", gender);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    cmd.ExecuteNonQuery();
-                }
-                connection.Close();
-            }
-            catch (Exception ex) { throw ex; }
-            finally { connection.Dispose(); }
-        }
         //Add Teacher
-        public void AddTeacher(int iD, string firstName, string lastName, string email, string gender, string password)
+        public void AddTeacher(int iD, string firstName, string lastName, string email, int phone)
         {
             SqlConnection connection = new SqlConnection();
             try
             {
                 connection.ConnectionString = connectionString;
                 connection.Open();
-                string sql = "INSERT INTO Teacher (id,firstName,lastName,email,gender) VALUES(@id,@firstName,@lastName,@email,@gender)";
+                string sql = "INSERT INTO Teacher (id,firstName,lastName,email,phone) VALUES(@id,@firstName,@lastName,@email,@phone)";
 
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
@@ -66,7 +41,7 @@ namespace FBS.Repository
                     cmd.Parameters.AddWithValue("@firstName", firstName);
                     cmd.Parameters.AddWithValue("@lastName", lastName);
                     cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@gender", gender);
+                    cmd.Parameters.AddWithValue("@phone", phone);
                     
                     cmd.ExecuteNonQuery();
                 }
@@ -77,10 +52,10 @@ namespace FBS.Repository
         }
         
     }
-    /*==========Get the list of students from the database==========*/
-    public void GetStudentsFromDatabase()
+    /*==========Get the list of teachers from the database==========*/
+    public void GetTeachersFromDatabase()
     {
-        students.Clear();
+        teachers.Clear();
 
         using (SqlConnection cnn = new SqlConnection(connectionString))
         {
@@ -89,12 +64,12 @@ namespace FBS.Repository
                 cnn.ConnectionString = connectionString;
                 cnn.Open();
                 cmd.Connection = cnn;
-                cmd.CommandText = "SELECT id, firstName, lastName, email,gender,password FROM Student ORDER BY id";
+                cmd.CommandText = "SELECT id, firstName, lastName, email,phone FROM Teacher ORDER BY id";
                 using (SqlDataReader dataReader = cmd.ExecuteReader())
                 {
                     while (dataReader.Read())
                     {
-                        products.Add(new Product(Int32.Parse(dataReader[0].ToString())
+                        teachers.Add(new Teacher(Int32.Parse(Int32.Parse(dataReader[0].ToString()))
                                                            , dataReader[1].ToString()
                                                            , dataReader[2].ToString()
                                                            , dataReader[3].ToString()
@@ -108,9 +83,9 @@ namespace FBS.Repository
     }
 
     /*==========Get a single student from the database==========*/
-    public Product GetSinglestudentByID(int id)
+    public Teacher GetSingleTeacherByID(int id)
     {
-        Student student = new Product("", "", "", "", "","");
+        Teacher teacher = new Teacher(0, "", "", "", "");
 
         using (SqlConnection cnn = new SqlConnection(connectionString))
         {
@@ -119,23 +94,23 @@ namespace FBS.Repository
                 cnn.ConnectionString = connectionString;
                 cnn.Open();
                 cmd.Connection = cnn;
-                cmd.CommandText = "SELECT id, firsName, lastName, email, gender,password FROM  WHERE id = @id";
+                cmd.CommandText = "SELECT id, firsName, lastName, email,phone FROM  Teacher WHERE id = @id";
                 cmd.Parameters.AddWithValue("@id", id);
 
                 using (SqlDataReader dataReader = cmd.ExecuteReader())
                 {
                     while (dataReader.Read())
                     {
-                        student.ID = dataReader[0].ToString();
-                        student.FirstName = dataReader[1].ToString();
-                        student.LastName = dataReader[2].ToString();
-                        student.Email = dataReader[3].ToString();
-                        student.Gender = dataReader[4].ToString();
-                        student.Password = dataReader[5].ToString();
+                        teacher.ID = dataReader[0];
+                        teacher.FirstName = dataReader[1].ToString();
+                        teacher.LastName = dataReader[2].ToString();
+                        teacher.Email = dataReader[3].ToString();
+                        teacher.Phone = dataReader[4].ToString();
+                        
                     }
                 }
             }
         }
-        return student;
+        return teacher;
     }
 }
