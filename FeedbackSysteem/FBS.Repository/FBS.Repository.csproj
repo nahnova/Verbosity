@@ -42,6 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeedbackCollection\Feedback\FeedbackRepo.cs" />
+    <Compile Include="FeedbackCollection\Goals\GoalRepo.cs" />
+    <Compile Include="FeedbackCollection\Students\StudentsRepo.cs" />
+    <Compile Include="FeedbackCollection\SubGoal\SubGoalRepo.cs" />
+    <Compile Include="FeedbackCollection\Teachers\TeachersRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Students\UsersRepo.cs" />
   </ItemGroup>
