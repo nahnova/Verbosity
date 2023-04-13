@@ -8,4 +8,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FBS.DataAccess\FBS.DataAccess.csproj" />
+    <ProjectReference Include="..\FBS.Entity\FBS.Entity.csproj" />
+    <ProjectReference Include="..\FBS.Repository\FBS.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
