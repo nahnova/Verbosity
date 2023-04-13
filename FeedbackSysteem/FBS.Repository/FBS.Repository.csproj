@@ -42,17 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InventoryProducts\Categories\BrandsRepo.cs" />
-    <Compile Include="InventoryProducts\Categories\MainCategoriesRepo.cs" />
-    <Compile Include="InventoryProducts\Expense\ExpenseRepo.cs" />
-    <Compile Include="InventoryProducts\Orders\OrdersRepo.cs" />
-    <Compile Include="InventoryProducts\Categories\MasterCategoriesRepo.cs" />
-    <Compile Include="InventoryProducts\Products\ProductsRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="InventoryProducts\Categories\SecondCategoriesReop.cs" />
-    <Compile Include="InventoryProducts\Categories\ThirdCategoriesRepo.cs" />
-    <Compile Include="InventoryProducts\Users\UsersRepo.cs" />
-    <Compile Include="InventoryProducts\Categories\VendorsRepo.cs" />
+    <Compile Include="Students\UsersRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FBS.DataAccess\FBS.DataAccess.csproj">
