@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Goal
 {
@@ -8,7 +9,7 @@ public class Goal
 
 	public string Priority { get; set; }
 
-	public string Goal { get; set; }
+	public string CreatedGoal { get; set; }
 
 	public string Time { get; set; }
 
@@ -20,7 +21,7 @@ public class Goal
 		ID = iD;
 		StudentID = studentID;
 		Priority = priority;
-		Goal = goal;
+		CreatedGoal = goal;
 		Time = time;
 	}
 

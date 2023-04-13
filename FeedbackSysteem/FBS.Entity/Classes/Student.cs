@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Student
 {
@@ -30,5 +31,6 @@ public class Student
 		Gender = gender;
 		Password = password;
 	}
+}
     
 	
