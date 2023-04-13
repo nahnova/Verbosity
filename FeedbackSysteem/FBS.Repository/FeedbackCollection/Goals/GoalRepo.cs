@@ -15,39 +15,37 @@ using FBS.Entity.InventoryProducts;
 namespace FBS.Repository
 {
 
-    public class FeedbackRepo
+    public class GoalRepo
 
     {
         private InventoryDBDataAccess iDB{ get; set; }
 
-        public FeedbackRepo()
+        public GoalRepo()
 
         {
             this.iDB = new InventoryDBDataAccess();
         }
         FeedbackCollectionDBDataAccess()
-        public List<Feedback> feedbackList = new List<Feedback>();
+        public List<Goal> goals = new List<Goal>();
 
 
-        //Add Feedback
-        public void AddFeedback(int id, int teacherID, int studentID, DateTime date, string course,string feedback, string type)
+        //Add Goal
+        public void AddGoal(int id, int studentId, string priority, string goal, string time)
         {
             SqlConnection connection = new SqlConnection();
             try
             {
                 connection.ConnectionString = connectionString;
                 connection.Open();
-                string sql = "INSERT INTO Feedback (id,teacherId,studentId,date,course,feedback,type) VALUES(@id,@teacherId,@studentId,@date,@course,@feedback,@type)";
+                string sql = "INSERT INTO Goal (id,studentID,priority,goal,time) VALUES(@id,@studentID,@priority,@goal,@time)";
 
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@teacherId", teacherID);
-                    cmd.Parameters.AddWithValue("@studentId", studentID);
-                    cmd.Parameters.AddWithValue("@date", date);
-                    cmd.Parameters.AddWithValue("@course", course);
-                    cmd.Parameters.AddWithValue("@feedback", feedback);
-                    cmd.Parameters.AddWithValue("@type", type);
+                    cmd.Parameters.AddWithValue("@studentID", studentId);
+                    cmd.Parameters.AddWithValue("@priority", priority);
+                    cmd.Parameters.AddWithValue("@goal", goal);
+                    cmd.Parameters.AddWithValue("@time", time);
                     cmd.ExecuteNonQuery();
                 }
                 connection.Close();
@@ -56,10 +54,10 @@ namespace FBS.Repository
             finally { connection.Dispose(); }
         }
 
-        /*==========Get the list of feedback from the database==========*/
-        public void GetFeedbackFromDatabase()
+        /*==========Get the list of goals from the database==========*/
+        public void GetGoalsFromDatabase()
         {
-            feedbackList.Clear();
+            goals.Clear();
 
             using (SqlConnection cnn = new SqlConnection(connectionString))
             {
@@ -68,18 +66,16 @@ namespace FBS.Repository
                     cnn.ConnectionString = connectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
-                    cmd.CommandText = "SELECT id, teacherId, studentId, date,course,feedback,type FROM Feedback ORDER BY id";
+                    cmd.CommandText = "SELECT id,studentID,priority,goal,time FROM Goal ORDER BY id";
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
                         while (dataReader.Read())
                         {
-                            feedbackList.Add(new Feedback(Int32.Parse(Int32.Parse(dataReader[0].ToString()))
+                            goals.Add(new Goal(Int32.Parse(dataReader[0].ToString())))
                                                                , Int32.Parse(dataReader[1].ToString())
-                                                               , Int32.Parse(dataReader[2].ToString())
-                                                               , DateTime.Parse(dataReader[3].ToString())
+                                                               , dataReader[2].ToString()
+                                                               , dataReader[3].ToString()
                                                                , dataReader[4].ToString()
-                                                               , dataReader[5].ToString()
-                                                               , dataReader[6].ToString()
                                                                )
                                         );
                         }
@@ -88,10 +84,10 @@ namespace FBS.Repository
             }
         }
 
-        /*==========Get a single feedback from the database==========*/
-        public Feedback GetSingleFeedbackByID(int id)
+        /*==========Get a single goal from the database==========*/
+        public Goal GetSingleGoalByID(int id)
         {
-            Feedback feedback = new Feedback(0, 0, 0, 01-01-2023, "", "","");
+            Goal goal = new Goal(0, 0,"","","");
 
             using (SqlConnection cnn = new SqlConnection(connectionString))
             {
@@ -100,37 +96,34 @@ namespace FBS.Repository
                     cnn.ConnectionString = connectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
-                    cmd.CommandText = "SELECT id, teacherId, studentId, date,course,feedback,type FROM Feedback WHERE id = @id";
+                    cmd.CommandText = "SELECT id,studentID,priority,goal,time FROM Goal WHERE id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
 
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
                         while (dataReader.Read())
                         {
-                            feedback.ID = Int32.Parse(dataReader[0].ToString());
-                            feedback.Date = DateTime.Parse(dataReader[3].ToString());
-                            feedback.Course = dataReader[4].ToString();
-                            feedback.Feedback = dataReader[5].ToString();
-                            feedback.Type = dataReader[6].ToString();
-                            feedback.SingleTeacher.ID = Int32.Parse(dataReader[1].ToString());
-                            feedback.SingleStudent,ID = Int32.Parse(dataReader[2].ToString());
-                           
+                            goal.ID = Int32.Parse(dataReader[0].ToString());
+                            goal.studentID = Int32.Parse(dataReader[1].ToString());
+                            goal.priority = dataReader[2].ToString();
+                            goal.goal = dataReader[3].ToString();
+                            goal.time = dataReader[4].ToString();                          
                         }
                     }
                 }
             }
-            return feedback;
+            return goal;
         }
 
-        //Delete Feedback
-        public void DeleteFeedback(int id)
+        //Delete Goal
+        public void DeleteGoal(int id)
         {
             SqlConnection connection = new SqlConnection();
             try
             {
                 connection.ConnectionString = connectionString;
                 connection.Open();
-                string sql = "DELETE Feedback WHERE id = @id";
+                string sql = "DELETE Goal WHERE id = @id";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
@@ -145,24 +138,22 @@ namespace FBS.Repository
             finally { connection.Dispose(); }
         }
 
-        // Update feedback
-        public void UpdateFeedback(int id, DateTime date, string course, string feedback, string type,int teacherId, int studentId)
+        // Update Goal
+        public void UpdateGoal(int id, int studentId, string priority, string goal, string time)
         {
             SqlConnection connection = new SqlConnection();
             try
             {
                 connection.ConnectionString = connectionString;
                 connection.Open();
-                string sql = "UPDATE Feedback SET id = @id,date = @date,course = @course,feedback= @feedback,type = @type,teacherId= @teacherId,studentId = @studentId WHERE id = @id";
+                string sql = "UPDATE Goal SET id = @id,studentID= @studentID,priority = @priority,goal= @goal,time = @time WHERE id = @id";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@date", date);
-                    cmd.Parameters.AddWithValue("@course",course );
-                    cmd.Parameters.AddWithValue("@feedback", feedback);
-                    cmd.Parameters.AddWithValue("@type", type);
-                    cmd.Parameters.AddWithValue("@teacherId", teacherId);
-                    cmd.Parameters.AddWithValue("@studentId", studentId);
+                    cmd.Parameters.AddWithValue("@studentID", studentId);
+                    cmd.Parameters.AddWithValue("@priority",priority );
+                    cmd.Parameters.AddWithValue("@goal", goal);
+                    cmd.Parameters.AddWithValue("@time", time);
                     cmd.ExecuteNonQuery();
                 }
                 connection.Close();
