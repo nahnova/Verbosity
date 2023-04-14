@@ -37,7 +37,6 @@
             columnHeader3 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
-            textBox1 = new TextBox();
             button4 = new Button();
             SuspendLayout();
             // 
@@ -49,7 +48,7 @@
             button3.TabIndex = 6;
             button3.Text = "Delete goal";
             button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            button3.Click += DeleteGoal;
             // 
             // button2
             // 
@@ -59,7 +58,7 @@
             button2.TabIndex = 5;
             button2.Text = "Update goal";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            button2.Click += UpdateGoal;
             // 
             // button1
             // 
@@ -69,7 +68,7 @@
             button1.TabIndex = 4;
             button1.Text = "Add goal";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            button1.Click += CreateGoal;
             // 
             // listView1
             // 
@@ -80,6 +79,7 @@
             listView1.TabIndex = 7;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
+            listView1.SelectedIndexChanged += SelectListviewId;
             // 
             // columnHeader1
             // 
@@ -104,13 +104,6 @@
             // 
             columnHeader5.Text = "tijd";
             // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(465, 41);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(73, 27);
-            textBox1.TabIndex = 8;
-            // 
             // button4
             // 
             button4.Location = new Point(544, 38);
@@ -119,7 +112,7 @@
             button4.TabIndex = 9;
             button4.Text = "Open subgoals";
             button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+            button4.Click += OpenSubGoals;
             // 
             // GoalForm
             // 
@@ -127,7 +120,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(711, 487);
             Controls.Add(button4);
-            Controls.Add(textBox1);
             Controls.Add(listView1);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -135,7 +127,6 @@
             Name = "GoalForm";
             Text = "GoalForm";
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -144,7 +135,6 @@
         private Button button2;
         private Button button1;
         private ListView listView1;
-        private TextBox textBox1;
         private Button button4;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;

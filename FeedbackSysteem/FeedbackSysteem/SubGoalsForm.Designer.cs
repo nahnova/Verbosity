@@ -46,6 +46,7 @@
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
+            listView1.SelectedIndexChanged += listView1_SelectedIndexChanged;
             // 
             // columnHeader1
             // 
@@ -69,7 +70,7 @@
             button1.TabIndex = 1;
             button1.Text = "Add subgoal";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            button1.Click += CreateSubGoal;
             // 
             // button2
             // 
@@ -79,7 +80,7 @@
             button2.TabIndex = 2;
             button2.Text = "Delete subgoal";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            button2.Click += DeleteSubGoal;
             // 
             // textBox1
             // 

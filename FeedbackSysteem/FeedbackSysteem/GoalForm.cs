@@ -7,6 +7,8 @@ namespace FeedbackSysteem
 {
     public partial class GoalForm : Form
     {
+        public int SelectedGoalId { get; set; }
+
         public GoalForm()
         {
             InitializeComponent();
@@ -39,40 +41,35 @@ namespace FeedbackSysteem
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CreateGoal(object sender, EventArgs e)
         {
             AddGoalForm addGoalForm = new AddGoalForm();
             addGoalForm.ShowDialog();
             Refresh_Listview();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void UpdateGoal(object sender, EventArgs e)
         {
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void DeleteGoal(object sender, EventArgs e)
         {
 
         }
 
-        void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void OpenSubGoals(object sender, EventArgs e)
         {
-            textBox1.Text = listView1.SelectedItems[0].Text;
+            SubGoalsForm subGoalsForm = new SubGoalsForm(SelectedGoalId);
+            subGoalsForm.ShowDialog();
+            Refresh_Listview();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void SelectListviewId(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBox1.Text))
+            if (listView1.SelectedItems.Count > 0)
             {
-                string emptyId = "Please fill in a Id";
-                MessageBox.Show(emptyId);
-            }
-            else
-            {
-                SubGoalsForm subGoalsForm = new SubGoalsForm(Int32.Parse(textBox1.Text));
-                subGoalsForm.ShowDialog();
-                Refresh_Listview();
+                SelectedGoalId = Int32.Parse(listView1.SelectedItems[0].Text);
             }
         }
     }
