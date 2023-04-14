@@ -28,18 +28,17 @@ namespace FBS.Repository
 
 
         //Add subgoal to a goal
-        public void AddSubGoal(int id, int goalId,string subGoal)
+        public void AddSubGoal(int goalId,string subGoal)
         {
             SqlConnection connection = new SqlConnection();
             try
             {
                 connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
-                string sql = "INSERT INTO SubGoal (id,goalId,subGoal) VALUES(@id,@goalId,@subGoal)";
+                string sql = "INSERT INTO SubGoal (goalId,subGoal) VALUES(@goalId,@subGoal)";
 
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@goalId", goalId);
                     cmd.Parameters.AddWithValue("@subGoal", subGoal);
                     cmd.ExecuteNonQuery();
@@ -51,7 +50,7 @@ namespace FBS.Repository
         }
 
         /*==========Get the list of Subgoals from the database==========*/
-        /*public void GetSubGoalsFromDatabase()
+        public void GetSubGoalsFromDatabase(int goalID)
         {
             subGoals.Clear();
 
@@ -62,22 +61,22 @@ namespace FBS.Repository
                     cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
-                    cmd.CommandText = "SELECT id,goalId,subGoal FROM SubGoal ORDER BY id";
+                    cmd.CommandText = "SELECT id,goalId,subGoal FROM SubGoal WHERE goalID = @goalID";
+                    cmd.Parameters.AddWithValue("@goalID", goalID);
+
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
                         while (dataReader.Read())
                         {
                             int iD = Int32.Parse(dataReader[0].ToString());
-                            int goalIdInt = Int32.Parse(dataReader[1].ToString());
-                            //Goal goalId = GetSingleGoalByID(goalIdInt); // Replace with the appropriate method to get a Goal instance by Id
                             string subgoal = dataReader[2].ToString();
 
-                            subGoals.Add(new SubGoal(iD, subgoal, goalId));
+                            subGoals.Add(new SubGoal(iD, goalID, subgoal));
                         }
                     }
                 }
             }
-        }*/
+        }
 
         /*==========Get a single Subgoal from the database==========*/
         /*public SubGoal GetSingleSubGoalByID(int id)

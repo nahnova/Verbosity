@@ -32,13 +32,13 @@
             button2 = new Button();
             button1 = new Button();
             listView1 = new ListView();
-            textBox1 = new TextBox();
-            button4 = new Button();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
+            textBox1 = new TextBox();
+            button4 = new Button();
             SuspendLayout();
             // 
             // button3
@@ -79,6 +79,30 @@
             listView1.Size = new Size(651, 387);
             listView1.TabIndex = 7;
             listView1.UseCompatibleStateImageBehavior = false;
+            listView1.View = View.Details;
+            // 
+            // columnHeader1
+            // 
+            columnHeader1.Text = "Id";
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.Text = "studentid";
+            columnHeader2.Width = 100;
+            // 
+            // columnHeader3
+            // 
+            columnHeader3.Text = "Feedback";
+            columnHeader3.Width = 350;
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "prioriteit";
+            columnHeader4.Width = 90;
+            // 
+            // columnHeader5
+            // 
+            columnHeader5.Text = "tijd";
             // 
             // textBox1
             // 
@@ -96,26 +120,6 @@
             button4.Text = "Open subgoals";
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
-            // 
-            // columnHeader1
-            // 
-            columnHeader1.Text = "Id";
-            // 
-            // columnHeader2
-            // 
-            columnHeader2.Text = "studentid";
-            // 
-            // columnHeader3
-            // 
-            columnHeader3.Text = "Feedback";
-            // 
-            // columnHeader4
-            // 
-            columnHeader4.Text = "prioriteit";
-            // 
-            // columnHeader5
-            // 
-            columnHeader5.Text = "tijd";
             // 
             // GoalForm
             // 

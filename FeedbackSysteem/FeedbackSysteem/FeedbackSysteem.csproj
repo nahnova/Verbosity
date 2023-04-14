@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FBS.DataAccess\FBS.DataAccess.csproj" />
     <ProjectReference Include="..\FBS.Entity\FBS.Entity.csproj" />
     <ProjectReference Include="..\FBS.Repository\FBS.Repository.csproj" />

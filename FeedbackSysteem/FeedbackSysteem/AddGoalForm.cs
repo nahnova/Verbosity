@@ -16,18 +16,17 @@ namespace FeedbackSysteem
 
             try
             {
-                int goalID = 0;
                 int studentID = Int32.Parse(textBox1.Text);
-                string priority = textBox2.Text;
-                string createdGoal = textBox3.Text;
+                string goal = textBox2.Text;
+                string priority = comboBox1.Text;
                 string time = textBox4.Text;
 
-                goalRepo.AddGoal(goalID, studentID, priority, createdGoal, time);
+                goalRepo.AddGoal(studentID, priority, goal, time);
                 Close();
             }
-            catch
+            catch (Exception ex) 
             {
-                string failedCreate = "Failed to create the goal!";
+                string failedCreate = "Failed to create the goal!" + ex.Message;
                 MessageBox.Show(failedCreate);
             }
         }

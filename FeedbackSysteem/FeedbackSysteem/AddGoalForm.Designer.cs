@@ -31,7 +31,6 @@
             components = new System.ComponentModel.Container();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
-            textBox3 = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -39,6 +38,7 @@
             contextMenuStrip1 = new ContextMenuStrip(components);
             label4 = new Label();
             textBox4 = new TextBox();
+            comboBox1 = new ComboBox();
             SuspendLayout();
             // 
             // textBox1
@@ -55,13 +55,6 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(307, 222);
             textBox2.TabIndex = 1;
-            // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(188, 339);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(232, 27);
-            textBox3.TabIndex = 2;
             // 
             // label1
             // 
@@ -130,18 +123,28 @@
             textBox4.Size = new Size(232, 27);
             textBox4.TabIndex = 8;
             // 
+            // comboBox1
+            // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "Laag", "Gemiddeld", "Urgent" });
+            comboBox1.Location = new Point(187, 339);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(233, 28);
+            comboBox1.TabIndex = 9;
+            // 
             // AddGoalForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(483, 509);
+            Controls.Add(comboBox1);
             Controls.Add(textBox4);
             Controls.Add(label4);
             Controls.Add(button1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(textBox3);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Name = "AddGoalForm";
@@ -154,7 +157,6 @@
 
         private TextBox textBox1;
         private TextBox textBox2;
-        private TextBox textBox3;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -162,5 +164,6 @@
         private ContextMenuStrip contextMenuStrip1;
         private Label label4;
         private TextBox textBox4;
+        private ComboBox comboBox1;
     }
 }

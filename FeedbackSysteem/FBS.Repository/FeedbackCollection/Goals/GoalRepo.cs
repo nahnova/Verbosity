@@ -28,18 +28,17 @@ namespace FBS.Repository
 
 
         //Add Goal
-        public void AddGoal(int id, int studentId, string priority, string goal, string time)
+        public void AddGoal(int studentId, string priority, string goal, string time)
         {
             SqlConnection connection = new SqlConnection();
             try
             {
                 connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
-                string sql = "INSERT INTO Goal (id,studentID,priority,goal,time) VALUES(@id,@studentID,@priority,@goal,@time)";
+                string sql = "INSERT INTO Goal (studentID,priority,goal,time) VALUES(@studentID,@priority,@goal,@time)";
 
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@studentID", studentId);
                     cmd.Parameters.AddWithValue("@priority", priority);
                     cmd.Parameters.AddWithValue("@goal", goal);

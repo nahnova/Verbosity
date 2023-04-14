@@ -26,9 +26,9 @@ namespace FeedbackSysteem
                 {
                     ListViewItem goalItem = new ListViewItem(goal.ID.ToString());
                     goalItem.SubItems.Add(goal.StudentID.ToString());
-                    goalItem.SubItems.Add(goal.Priority);
-                    goalItem.SubItems.Add(goal.CreatedGoal);
-                    goalItem.SubItems.Add(goal.Time);
+                    goalItem.SubItems.Add(goal.Priority.ToString());
+                    goalItem.SubItems.Add(goal.CreatedGoal.ToString());
+                    goalItem.SubItems.Add(goal.Time.ToString());
                     listView1.Items.Add(goalItem);
                 }
             }
@@ -41,7 +41,9 @@ namespace FeedbackSysteem
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            AddGoalForm addGoalForm = new AddGoalForm();
+            addGoalForm.ShowDialog();
+            Refresh_Listview();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -52,6 +54,11 @@ namespace FeedbackSysteem
         private void button3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            textBox1.Text = listView1.SelectedItems[0].Text;
         }
 
         private void button4_Click(object sender, EventArgs e)
