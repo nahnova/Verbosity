@@ -30,7 +30,7 @@ namespace FBS.Repository
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
                 string sql = "INSERT INTO Student (id,firstName,lastName,email,gender,password) VALUES(@id,@firstName,@lastName,@email,@gender,@password)";
 
@@ -55,11 +55,11 @@ namespace FBS.Repository
         {
             students.Clear();
 
-            using (SqlConnection cnn = new SqlConnection(connectionString))
+            using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cnn.ConnectionString = connectionString;
+                    cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
                     cmd.CommandText = "SELECT id, firstName, lastName, email,gender,password FROM Student ORDER BY id";
@@ -86,11 +86,11 @@ namespace FBS.Repository
         {
             Student student = new Student(0, "", "", "", "", "");
 
-            using (SqlConnection cnn = new SqlConnection(connectionString))
+            using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cnn.ConnectionString = connectionString;
+                    cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
                     cmd.CommandText = "SELECT id, firsName, lastName, email, gender,password FROM  WHERE id = @id";

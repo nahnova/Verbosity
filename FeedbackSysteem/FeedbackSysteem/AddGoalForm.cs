@@ -1,19 +1,28 @@
-﻿namespace FeedbackSysteem
+﻿using System;
+using System.Windows.Forms;
+using FBS.Repository;
+
+namespace FeedbackSysteem
 {
     public partial class AddGoalForm : Form
     {
-   
         public AddGoalForm()
         {
             InitializeComponent();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
+            GoalRepo goalRepo = new GoalRepo();
+
             try
             {
-                Goal goal = new Goal(0,0, textBox1.Text, textBox2.Text, textBox3.Text);
-                FBS.Repository.UsersRepo.AddGoal(goal);
+                int goalID = 0;
+                int studentID = Int32.Parse(textBox1.Text);
+                string priority = textBox2.Text;
+                string createdGoal = textBox3.Text;
+                string time = textBox4.Text;
+
+                goalRepo.AddGoal(goalID, studentID, priority, createdGoal, time);
                 Close();
             }
             catch

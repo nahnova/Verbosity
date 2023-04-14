@@ -51,7 +51,7 @@ namespace FBS.Repository
         }
 
         /*==========Get the list of Subgoals from the database==========*/
-        public void GetSubGoalsFromDatabase()
+        /*public void GetSubGoalsFromDatabase()
         {
             subGoals.Clear();
 
@@ -69,21 +69,20 @@ namespace FBS.Repository
                         {
                             int iD = Int32.Parse(dataReader[0].ToString());
                             int goalIdInt = Int32.Parse(dataReader[1].ToString());
-                            Goal goalId = GetGoalById(goalIdInt); // Replace with the appropriate method to get a Goal instance by Id
+                            //Goal goalId = GetSingleGoalByID(goalIdInt); // Replace with the appropriate method to get a Goal instance by Id
                             string subgoal = dataReader[2].ToString();
 
-                            subGoals.Add(new SubGoal(iD, goalId, subgoal));
+                            subGoals.Add(new SubGoal(iD, subgoal, goalId));
                         }
                     }
                 }
             }
-        }
-
+        }*/
 
         /*==========Get a single Subgoal from the database==========*/
-        public SubGoal GetSingleSubGoalByID(int id)
+        /*public SubGoal GetSingleSubGoalByID(int id)
         {
-            SubGoal subGoal = new SubGoal(0,0,"");
+            SubGoal subGoal = new SubGoal(0,"",0);
 
             using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
             {
@@ -100,14 +99,14 @@ namespace FBS.Repository
                         while (dataReader.Read())
                         {
                             subGoal.ID = Int32.Parse(dataReader[0].ToString());
-                            subGoal.subgoal = dataReader[2].ToString();
-                            subGoal.Goal.ID = Int32.Parse(dataReader[1].ToString());                         
+                            subGoal.Subgoal = dataReader[2].ToString();
+                            subGoal.SingleGoal.ID = Int32.Parse(dataReader[1].ToString());                         
                         }
                     }
                 }
             }
             return subGoal;
-        }
+        }*/
 
         //Delete Subgoal
         public void DeleteSubGoal(int id)

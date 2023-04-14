@@ -44,6 +44,7 @@ namespace FBS.DataAccess
         {
             this.Sqlcon = new SqlConnection(@"Data Source=DESKTOP-FS0T5UA;Initial Catalog=feedbackDB;Integrated Security=True");
             Sqlcon.Open();
+            Console.WriteLine("The SQL Connection is working");
         }
 
         private void QueryText(string query)

@@ -8,10 +8,10 @@ public class SubGoal
 
 	public Goal SingleGoal { get; set; }
 	
-	public SubGoal(int iD, Goal goal, string subgoal)
+	public SubGoal(int iD, string subgoal, Goal goal)
 	{
 		ID = iD;
-		SingleGoal = goal;
-		Subgoal = subgoal;
+        Subgoal = subgoal;
+        SingleGoal = goal;
 	}
 }

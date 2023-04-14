@@ -32,13 +32,20 @@
             button2 = new Button();
             button1 = new Button();
             listView1 = new ListView();
+            textBox1 = new TextBox();
+            button4 = new Button();
+            columnHeader1 = new ColumnHeader();
+            columnHeader2 = new ColumnHeader();
+            columnHeader3 = new ColumnHeader();
+            columnHeader4 = new ColumnHeader();
+            columnHeader5 = new ColumnHeader();
             SuspendLayout();
             // 
             // button3
             // 
-            button3.Location = new Point(388, 40);
+            button3.Location = new Point(245, 41);
             button3.Name = "button3";
-            button3.Size = new Size(134, 29);
+            button3.Size = new Size(106, 29);
             button3.TabIndex = 6;
             button3.Text = "Delete goal";
             button3.UseVisualStyleBackColor = true;
@@ -46,9 +53,9 @@
             // 
             // button2
             // 
-            button2.Location = new Point(248, 40);
+            button2.Location = new Point(131, 40);
             button2.Name = "button2";
-            button2.Size = new Size(134, 29);
+            button2.Size = new Size(108, 29);
             button2.TabIndex = 5;
             button2.Text = "Update goal";
             button2.UseVisualStyleBackColor = true;
@@ -56,9 +63,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(108, 40);
+            button1.Location = new Point(27, 40);
             button1.Name = "button1";
-            button1.Size = new Size(134, 29);
+            button1.Size = new Size(98, 29);
             button1.TabIndex = 4;
             button1.Text = "Add goal";
             button1.UseVisualStyleBackColor = true;
@@ -66,17 +73,57 @@
             // 
             // listView1
             // 
+            listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5 });
             listView1.Location = new Point(27, 88);
             listView1.Name = "listView1";
-            listView1.Size = new Size(556, 387);
+            listView1.Size = new Size(651, 387);
             listView1.TabIndex = 7;
             listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(465, 41);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(73, 27);
+            textBox1.TabIndex = 8;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(544, 38);
+            button4.Name = "button4";
+            button4.Size = new Size(134, 29);
+            button4.TabIndex = 9;
+            button4.Text = "Open subgoals";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // columnHeader1
+            // 
+            columnHeader1.Text = "Id";
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.Text = "studentid";
+            // 
+            // columnHeader3
+            // 
+            columnHeader3.Text = "Feedback";
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "prioriteit";
+            // 
+            // columnHeader5
+            // 
+            columnHeader5.Text = "tijd";
             // 
             // GoalForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(623, 487);
+            ClientSize = new Size(711, 487);
+            Controls.Add(button4);
+            Controls.Add(textBox1);
             Controls.Add(listView1);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -84,6 +131,7 @@
             Name = "GoalForm";
             Text = "GoalForm";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -92,5 +140,12 @@
         private Button button2;
         private Button button1;
         private ListView listView1;
+        private TextBox textBox1;
+        private Button button4;
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
+        private ColumnHeader columnHeader5;
     }
 }

@@ -33,7 +33,7 @@ namespace FBS.Repository
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
                 string sql = "INSERT INTO Goal (id,studentID,priority,goal,time) VALUES(@id,@studentID,@priority,@goal,@time)";
 
@@ -57,11 +57,11 @@ namespace FBS.Repository
         {
             goals.Clear();
 
-            using (SqlConnection cnn = new SqlConnection(connectionString))
+            using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cnn.ConnectionString = connectionString;
+                    cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
                     cmd.CommandText = "SELECT id,studentID,priority,goal,time FROM Goal ORDER BY id";
@@ -87,11 +87,11 @@ namespace FBS.Repository
         {
             Goal goal = new Goal(0, 0, "", "", "");
 
-            using (SqlConnection cnn = new SqlConnection(connectionString))
+            using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cnn.ConnectionString = connectionString;
+                    cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
                     cmd.CommandText = "SELECT id,studentID,priority,goal,time FROM Goal WHERE id = @id";
@@ -102,10 +102,10 @@ namespace FBS.Repository
                         while (dataReader.Read())
                         {
                             goal.ID = Int32.Parse(dataReader[0].ToString());
-                            goal.studentID = Int32.Parse(dataReader[1].ToString());
-                            goal.priority = dataReader[2].ToString();
-                            goal.goal = dataReader[3].ToString();
-                            goal.time = dataReader[4].ToString();
+                            goal.StudentID = Int32.Parse(dataReader[1].ToString());
+                            goal.Priority = dataReader[2].ToString();
+                            goal.CreatedGoal = dataReader[3].ToString();
+                            goal.Time = dataReader[4].ToString();
                         }
                     }
                 }
@@ -119,7 +119,7 @@ namespace FBS.Repository
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
                 string sql = "DELETE Goal WHERE id = @id";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
@@ -142,7 +142,7 @@ namespace FBS.Repository
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
                 string sql = "UPDATE Goal SET id = @id,studentID= @studentID,priority = @priority,goal= @goal,time = @time WHERE id = @id";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
