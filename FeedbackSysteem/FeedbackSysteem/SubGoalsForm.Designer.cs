@@ -32,6 +32,7 @@
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
+            columnHeader4 = new ColumnHeader();
             button1 = new Button();
             button2 = new Button();
             textBox1 = new TextBox();
@@ -39,10 +40,10 @@
             // 
             // listView1
             // 
-            listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3 });
-            listView1.Location = new Point(12, 127);
+            listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
+            listView1.Location = new Point(12, 95);
             listView1.Name = "listView1";
-            listView1.Size = new Size(717, 381);
+            listView1.Size = new Size(717, 413);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -50,35 +51,40 @@
             // 
             // columnHeader1
             // 
-            columnHeader1.Text = "SubgoalId";
+            columnHeader1.Text = "SubdoelId";
             columnHeader1.Width = 100;
             // 
             // columnHeader2
             // 
-            columnHeader2.Text = "GoalId";
+            columnHeader2.Text = "DoelId";
             // 
             // columnHeader3
             // 
-            columnHeader3.Text = "Subgoal";
-            columnHeader3.Width = 600;
+            columnHeader3.Text = "Subdoel";
+            columnHeader3.Width = 470;
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "Status";
+            columnHeader4.Width = 100;
             // 
             // button1
             // 
-            button1.Location = new Point(328, 32);
+            button1.Location = new Point(347, 16);
             button1.Name = "button1";
             button1.Size = new Size(201, 29);
             button1.TabIndex = 1;
-            button1.Text = "Add subgoal";
+            button1.Text = "Subdoel toevoegen";
             button1.UseVisualStyleBackColor = true;
             button1.Click += CreateSubGoal;
             // 
             // button2
             // 
-            button2.Location = new Point(328, 67);
+            button2.Location = new Point(347, 51);
             button2.Name = "button2";
             button2.Size = new Size(201, 29);
             button2.TabIndex = 2;
-            button2.Text = "Delete subgoal";
+            button2.Text = "Subdoel verwijderen";
             button2.UseVisualStyleBackColor = true;
             button2.Click += DeleteSubGoal;
             // 
@@ -87,7 +93,7 @@
             textBox1.Location = new Point(12, 12);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(310, 109);
+            textBox1.Size = new Size(329, 77);
             textBox1.TabIndex = 3;
             // 
             // SubGoalsForm
@@ -114,5 +120,6 @@
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
     }
 }

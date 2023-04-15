@@ -13,16 +13,19 @@ public class Goal
 
 	public string Time { get; set; }
 
+	public string Status { get; set; }
+
     public List<SubGoal> ListOfSubGoal = new List<SubGoal>();
 
 	// This goal contains no subgoals
-    public Goal(int iD, int studentID, string priority, string goal, string time)
+    public Goal(int iD, int studentID, string priority, string goal, string time, string status)
 	{
 		ID = iD;
 		StudentID = studentID;
 		Priority = priority;
 		CreatedGoal = goal;
 		Time = time;
+		Status = status;
 	}
 
 }

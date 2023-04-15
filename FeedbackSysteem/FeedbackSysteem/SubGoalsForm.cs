@@ -38,6 +38,7 @@ namespace FeedbackSysteem
                     ListViewItem goalItem = new ListViewItem(subGoal.ID.ToString());
                     goalItem.SubItems.Add(subGoal.GoalID.ToString());
                     goalItem.SubItems.Add(subGoal.Subgoal.ToString());
+                    goalItem.SubItems.Add(subGoal.Status.ToString());
                     listView1.Items.Add(goalItem);
                 }
             }
@@ -57,7 +58,7 @@ namespace FeedbackSysteem
                 int goalId = ID;
                 string subgoal = textBox1.Text;
 
-                subGoalRepo.AddSubGoal(goalId, subgoal);
+                subGoalRepo.AddSubGoal(goalId, subgoal, "te doen");
                 textBox1.Clear();
                 Refresh_Listview();
             }
@@ -74,7 +75,7 @@ namespace FeedbackSysteem
             try
             {
                 subGoalRepo.DeleteSubGoal(DeleteId);
-                string DeletedSubgoal = "deleted subgoal "+ DeleteId +"";
+                string DeletedSubgoal = "deleted subgoal " + DeleteId + "";
                 MessageBox.Show(DeletedSubgoal);
                 Refresh_Listview();
             }

@@ -28,9 +28,10 @@ namespace FeedbackSysteem
                 {
                     ListViewItem goalItem = new ListViewItem(goal.ID.ToString());
                     goalItem.SubItems.Add(goal.StudentID.ToString());
-                    goalItem.SubItems.Add(goal.Priority.ToString());
                     goalItem.SubItems.Add(goal.CreatedGoal.ToString());
+                    goalItem.SubItems.Add(goal.Priority.ToString());
                     goalItem.SubItems.Add(goal.Time.ToString());
+                    goalItem.SubItems.Add(goal.Status.ToString());
                     listView1.Items.Add(goalItem);
                 }
             }
@@ -48,14 +49,21 @@ namespace FeedbackSysteem
             Refresh_Listview();
         }
 
-        private void UpdateGoal(object sender, EventArgs e)
-        {
-
-        }
-
         private void DeleteGoal(object sender, EventArgs e)
         {
-
+            GoalRepo goalRepo = new GoalRepo();
+            try
+            {
+                goalRepo.DeleteGoal(SelectedGoalId);
+                string DeletedSubgoal = "deleted goal " + SelectedGoalId + "";
+                MessageBox.Show(DeletedSubgoal);
+                Refresh_Listview();
+            }
+            catch (Exception ex)
+            {
+                string failedDelete = "Failed to delete the goal!" + ex.Message;
+                MessageBox.Show(failedDelete);
+            }
         }
 
         private void OpenSubGoals(object sender, EventArgs e)
@@ -65,6 +73,28 @@ namespace FeedbackSysteem
             Refresh_Listview();
         }
 
+        private void UpdateStatus(object sender, EventArgs e)
+        {
+            GoalRepo goalRepo = new GoalRepo();
+            try
+            {
+                goalRepo.UpdateGoalStatus(SelectedGoalId, comboBox1.Text);
+                string UpdatedStatus = "status from goal " + SelectedGoalId + " updated";
+                MessageBox.Show(UpdatedStatus);
+                Refresh_Listview();
+                if(comboBox1.Text == "afgerond")
+                {
+                    SubGoalRepo subGoalRepo = new SubGoalRepo();
+                    subGoalRepo.UpdateSubGoalStatus(SelectedGoalId, comboBox1.Text);
+                }
+            }
+            catch (Exception ex)
+            {
+                string failedDelete = "Failed to update the status!" + ex.Message;
+                MessageBox.Show(failedDelete);
+            }
+        }
+
         private void SelectListviewId(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count > 0)
@@ -72,5 +102,6 @@ namespace FeedbackSysteem
                 SelectedGoalId = Int32.Parse(listView1.SelectedItems[0].Text);
             }
         }
+
     }
 }

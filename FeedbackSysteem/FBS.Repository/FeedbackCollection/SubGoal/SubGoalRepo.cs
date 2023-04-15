@@ -28,19 +28,20 @@ namespace FBS.Repository
 
 
         //Add subgoal to a goal
-        public void AddSubGoal(int goalId,string subGoal)
+        public void AddSubGoal(int goalId,string subGoal, string status)
         {
             SqlConnection connection = new SqlConnection();
             try
             {
                 connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
-                string sql = "INSERT INTO SubGoal (goalId,subGoal) VALUES(@goalId,@subGoal)";
+                string sql = "INSERT INTO SubGoal (goalId,subGoal,status) VALUES(@goalId,@subGoal,@status)";
 
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     cmd.Parameters.AddWithValue("@goalId", goalId);
                     cmd.Parameters.AddWithValue("@subGoal", subGoal);
+                    cmd.Parameters.AddWithValue("@status", status);
                     cmd.ExecuteNonQuery();
                 }
                 connection.Close();
@@ -61,7 +62,7 @@ namespace FBS.Repository
                     cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
-                    cmd.CommandText = "SELECT id,goalId,subGoal FROM SubGoal WHERE goalID = @goalID";
+                    cmd.CommandText = "SELECT id,goalId,subGoal,status FROM SubGoal WHERE goalID = @goalID";
                     cmd.Parameters.AddWithValue("@goalID", goalID);
 
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
@@ -70,8 +71,9 @@ namespace FBS.Repository
                         {
                             int iD = Int32.Parse(dataReader[0].ToString());
                             string subgoal = dataReader[2].ToString();
+                            string status = dataReader[3].ToString();
 
-                            subGoals.Add(new SubGoal(iD, goalID, subgoal));
+                            subGoals.Add(new SubGoal(iD, goalID, subgoal,status));
                         }
                     }
                 }
@@ -131,21 +133,23 @@ namespace FBS.Repository
         }
 
         // Update Subgoal
-        public void UpdateSubGoal(int id, int goalId,string subGoal)
+        public void UpdateSubGoalStatus(int goalId,string status)
         {
             SqlConnection connection = new SqlConnection();
             try
             {
                 connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
-                string sql = "UPDATE SubGoal SET id = @id,goalId = @goalId,subGoal = @subGoal";
-                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                foreach (SubGoal subGoal in subGoals.Where(subGoal => subGoal.GoalID == goalId))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@goalId", goalId);
-                    cmd.Parameters.AddWithValue("@subGoal",subGoal );
-                    cmd.ExecuteNonQuery();
-                }
+                    string sql = "UPDATE SubGoal SET status = @status WHERE goalId = @goalId";
+                    using (SqlCommand cmd = new SqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@goalId", goalId);
+                        cmd.Parameters.AddWithValue("@status", status);
+                        cmd.ExecuteNonQuery();
+                    }
+                } 
                 connection.Close();
             }
             catch (SqlException ex)

@@ -19,7 +19,13 @@ namespace FeedbackSysteem
 
         private void button2_Click(object sender, EventArgs e)
         {
-            GoalForm goalForm = new GoalForm(); 
+            GoalForm goalForm = new GoalForm();
+            goalForm.ShowDialog();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            GoalForm goalForm = new GoalForm();
             goalForm.ShowDialog();
         }
     }

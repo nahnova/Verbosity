@@ -21,10 +21,10 @@ namespace FeedbackSysteem
                 string priority = comboBox1.Text;
                 string time = textBox4.Text;
 
-                goalRepo.AddGoal(studentID, priority, goal, time);
+                goalRepo.AddGoal(studentID, priority, goal, time, "te doen");
                 Close();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 string failedCreate = "Failed to create the goal!" + ex.Message;
                 MessageBox.Show(failedCreate);
