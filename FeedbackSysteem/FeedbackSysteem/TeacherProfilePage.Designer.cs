@@ -48,6 +48,7 @@
             button1.TabIndex = 20;
             button1.Text = "Update profiel";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += updateProfile;
             // 
             // label5
             // 

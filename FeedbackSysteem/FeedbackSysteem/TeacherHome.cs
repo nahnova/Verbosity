@@ -21,10 +21,10 @@ namespace FeedbackSysteem
             TeacherID = id;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void OpenStudentGoals(object sender, EventArgs e)
         {
-            GoalForm goalForm = new GoalForm(TeacherID);
-            goalForm.ShowDialog();
+            TeacherGoals teacherGoals = new TeacherGoals(TeacherID);
+            teacherGoals.ShowDialog();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

@@ -63,6 +63,7 @@
             button2.TabIndex = 6;
             button2.Text = "Doelen";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += OpenStudentGoals;
             // 
             // button1
             // 
