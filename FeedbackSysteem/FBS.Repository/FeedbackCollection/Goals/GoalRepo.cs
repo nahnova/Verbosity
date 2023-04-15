@@ -53,7 +53,7 @@ namespace FBS.Repository
         }
 
         /*==========Get the list of goals from the database==========*/
-        public void GetGoalsFromDatabase()
+        public void GetGoalsFromDatabase(int studentID)
         {
             goals.Clear();
 
@@ -64,7 +64,8 @@ namespace FBS.Repository
                     cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
-                    cmd.CommandText = "SELECT id,studentID,priority,goal,time,status FROM Goal ORDER BY id";
+                    cmd.CommandText = "SELECT id,studentID,priority,goal,time,status FROM Goal WHERE studentID = @studentID";
+                    cmd.Parameters.AddWithValue("@studentID", studentID);
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
                         while (dataReader.Read())

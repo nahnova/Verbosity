@@ -10,10 +10,10 @@ namespace FeedbackSysteem
     public partial class Form1 : Form
     {
         SqlCommand cmd;
-
         SqlDataReader dr;
 
         public int UserID { get; set; }
+        public int TeacherID { get; set; }
 
         private FeedbackCollectionDBDataAccess iDB { get; set; }
 
@@ -22,13 +22,14 @@ namespace FeedbackSysteem
             InitializeComponent();
             this.iDB = new FeedbackCollectionDBDataAccess();
         }
+
         private void button2_Click(object sender, EventArgs e)
         {
             RegisterForm registerForm = new RegisterForm();
             registerForm.ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void StudentLogin(object sender, EventArgs e)
         {
             if (textBox1.Text != string.Empty || textBox2.Text != string.Empty)
             {
@@ -46,6 +47,32 @@ namespace FeedbackSysteem
                 {
                     dr.Close();
                     MessageBox.Show("Vul een correcte gebruiker in!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vul de velden in!");
+            }
+        }
+
+        private void TeacherLogin(object sender, EventArgs e)
+        {
+            if (textBox3.Text != string.Empty || textBox4.Text != string.Empty)
+            {
+                cmd = new SqlCommand("SELECT * FROM Teacher WHERE email= '" + textBox3.Text + "' AND password= '" + textBox4.Text + "' ", iDB.Sqlcon);
+                dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    TeacherID = Convert.ToInt32(dr["id"]);
+                    dr.Close();
+                    this.Hide();
+                    TeacherHome teacherHome = new TeacherHome(TeacherID);
+                    teacherHome.ShowDialog();
+                }
+                else
+                {
+                    dr.Close();
+                    MessageBox.Show("Vul een correcte docent in!");
                 }
             }
             else

@@ -25,7 +25,7 @@ namespace FeedbackSysteem
 
                 GoalRepo goalRepo = new GoalRepo();
                 goalRepo.goals.Clear();
-                goalRepo.GetGoalsFromDatabase();
+                goalRepo.GetGoalsFromDatabase(UserID);
                 foreach (Goal goal in goalRepo.goals)
                 {
                     ListViewItem goalItem = new ListViewItem(goal.ID.ToString());

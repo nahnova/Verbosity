@@ -15,35 +15,43 @@ namespace FBS.Repository
 {
 
     public class SubGoalRepo
-
     {
-        private FeedbackCollectionDBDataAccess iDB{ get; set; }
+        private FeedbackCollectionDBDataAccess iDB { get; set; }
 
+        // Constructor that initializes the Feed backCollectionDBDataAccess object
         public SubGoalRepo()
-
         {
             this.iDB = new FeedbackCollectionDBDataAccess();
         }
+
+        // List of SubGoals
         public List<SubGoal> subGoals = new List<SubGoal>();
 
-
-        //Add subgoal to a goal
-        public void AddSubGoal(int goalId,string subGoal, string status)
+        // Add subgoal to a goal
+        public void AddSubGoal(int goalId,  string subGoal, string status)
         {
             SqlConnection connection = new SqlConnection();
             try
             {
+                // Open a new SqlConnection object and set its connection string to the database connection string
                 connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
+
+                // Define an SQL statement to insert a new subgoal into the database
                 string sql = "INSERT INTO SubGoal (goalId,subGoal,status) VALUES(@goalId,@subGoal,@status)";
 
+                // Create a SqlCommand object with the SQL statement and the database connection
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
+                    // Add parameters to the SqlCommand object for the new subgoal's details
                     cmd.Parameters.AddWithValue("@goalId", goalId);
                     cmd.Parameters.AddWithValue("@subGoal", subGoal);
                     cmd.Parameters.AddWithValue("@status", status);
+
+                    // Execute the SQL statement to insert the new subgoal
                     cmd.ExecuteNonQuery();
                 }
+                // Close the database connection
                 connection.Close();
             }
             catch (Exception ex) { throw ex; }
@@ -53,6 +61,7 @@ namespace FBS.Repository
         /*==========Get the list of Subgoals from the database==========*/
         public void GetSubGoalsFromDatabase(int goalID)
         {
+            // Clear the list of subgoals
             subGoals.Clear();
 
             using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
@@ -62,18 +71,20 @@ namespace FBS.Repository
                     cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
+                    // Define an SQL statement to retrieve a list of subgoals for a given goal
                     cmd.CommandText = "SELECT id,goalId,subGoal,status FROM SubGoal WHERE goalID = @goalID";
                     cmd.Parameters.AddWithValue("@goalID", goalID);
 
+                     // Execute the SQL statement and read the results into a SqlDataReader
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
                         while (dataReader.Read())
                         {
+                            // Extract the subgoal's details from the SqlDataReader and add it to the list of subgoals
                             int iD = Int32.Parse(dataReader[0].ToString());
                             string subgoal = dataReader[2].ToString();
                             string status = dataReader[3].ToString();
-
-                            subGoals.Add(new SubGoal(iD, goalID, subgoal,status));
+                            subGoals.Add(new SubGoal(iD, goalID, subgoal, status));
                         }
                     }
                 }

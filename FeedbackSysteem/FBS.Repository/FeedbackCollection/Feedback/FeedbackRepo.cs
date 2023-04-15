@@ -27,7 +27,7 @@ namespace FBS.Repository
         public List<Feedback> feedbackList = new List<Feedback>();
 
 
-        //Add Feedback
+        /*==========ADD feedback to the database==========*/
         public void AddFeedback(int id, int teacherID, int studentID, DateTime date, string course,string feedback, string type)
         {
             SqlConnection connection = new SqlConnection();
@@ -77,7 +77,7 @@ namespace FBS.Repository
                                 dataReader[4].ToString(), // set the Course property of the Feedback object to the fifth value in the dataReader array, as a string
                                 dataReader[5].ToString(), // set the GivenFeedback property of the Feedback object to the sixth value in the dataReader array, as a string
                                 dataReader[6].ToString(), // set the Type property of the Feedback object to the seventh value in the dataReader array, as a string
-                                new Teacher(Int32.Parse(dataReader[1].ToString()), "", "", "", ""), // set the SingleTeacher property of the Feedback object to a new Teacher object with the second value in the dataReader array as its ID, converted to an integer
+                                new Teacher(Int32.Parse(dataReader[1].ToString()), "", "", "", "", ""), // set the SingleTeacher property of the Feedback object to a new Teacher object with the second value in the dataReader array as its ID, converted to an integer
                                 new Student(Int32.Parse(dataReader[2].ToString()), "", "", "","","") // set the SingleStudent property of the Feedback object to a new Student object with the third value in the dataReader array as its ID, converted to an integer
                             ));
                         }
@@ -90,7 +90,7 @@ namespace FBS.Repository
         /*==========Get a single feedback from the database==========*/
         public Feedback GetSingleFeedbackByID(int id)
         {
-            Feedback feedback = new Feedback(0, new DateTime(2023, 1, 1), "", "", "", new Teacher(0, "", "", "", ""), new Student(0, "", "", "","",""));
+            Feedback feedback = new Feedback(0, new DateTime(2023, 1, 1), "", "", "", new Teacher(0, "", "", "", "", ""), new Student(0, "", "", "","",""));
 
             using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
             {
@@ -121,7 +121,7 @@ namespace FBS.Repository
             return feedback;
         }
 
-        //Delete Feedback
+        /*==========Delete a single feedback from the database==========*/
         public void DeleteFeedback(int id)
         {
             SqlConnection connection = new SqlConnection();
@@ -144,7 +144,7 @@ namespace FBS.Repository
             finally { connection.Dispose(); }
         }
 
-        // Update feedback
+        /*==========Update a single feedback from the database==========*/
         public void UpdateFeedback(int id, DateTime date, string course, string feedback, string type,int teacherId, int studentId)
         {
             SqlConnection connection = new SqlConnection();
