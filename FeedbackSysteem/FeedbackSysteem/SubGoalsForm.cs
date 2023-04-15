@@ -42,10 +42,9 @@ namespace FeedbackSysteem
                     listView1.Items.Add(goalItem);
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                string failedLoad = "Failed to load the goals! Error: " + ex.Message;
-                MessageBox.Show(failedLoad);
+                MessageBox.Show("Kan subdoelen niet laden!");
             }
         }
 
@@ -62,10 +61,9 @@ namespace FeedbackSysteem
                 textBox1.Clear();
                 Refresh_Listview();
             }
-            catch (Exception ex)
+            catch
             {
-                string failedCreate = "Failed to create the subgoal!" + ex.Message;
-                MessageBox.Show(failedCreate);
+                MessageBox.Show("Kan subdoel niet maken!");
             }
         }
 
@@ -75,14 +73,12 @@ namespace FeedbackSysteem
             try
             {
                 subGoalRepo.DeleteSubGoal(DeleteId);
-                string DeletedSubgoal = "deleted subgoal " + DeleteId + "";
-                MessageBox.Show(DeletedSubgoal);
+                MessageBox.Show("Subdoel " + DeleteId + " verwijderd");
                 Refresh_Listview();
             }
-            catch (Exception ex)
+            catch
             {
-                string failedDelete = "Failed to delete the subgoal!" + ex.Message;
-                MessageBox.Show(failedDelete);
+                MessageBox.Show("Kan subdoel niet verwijderen!");
             }
         }
 

@@ -12,21 +12,24 @@ namespace FeedbackSysteem
 {
     public partial class Home : Form
     {
-        public Home()
+        public int UserID { get; set; }
+
+        public Home(int id)
         {
             InitializeComponent();
+            UserID = id;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            GoalForm goalForm = new GoalForm();
+            GoalForm goalForm = new GoalForm(UserID);
             goalForm.ShowDialog();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            GoalForm goalForm = new GoalForm();
-            goalForm.ShowDialog();
+            ProfilePage profilePage = new ProfilePage(UserID);
+            profilePage.ShowDialog();
         }
     }
 }

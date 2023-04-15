@@ -7,11 +7,13 @@ namespace FeedbackSysteem
 {
     public partial class GoalForm : Form
     {
+        public int UserID { get; set; }
         public int SelectedGoalId { get; set; }
 
-        public GoalForm()
+        public GoalForm(int id)
         {
             InitializeComponent();
+            UserID = id;
             Refresh_Listview();
         }
 
@@ -35,16 +37,15 @@ namespace FeedbackSysteem
                     listView1.Items.Add(goalItem);
                 }
             }
-            catch (Exception ex)
+            catch 
             {
-                string failedLoad = "Failed to load the goals! Error: " + ex.Message;
-                MessageBox.Show(failedLoad);
+                MessageBox.Show("Kan doelen niet laden!");
             }
         }
 
         private void CreateGoal(object sender, EventArgs e)
         {
-            AddGoalForm addGoalForm = new AddGoalForm();
+            AddGoalForm addGoalForm = new AddGoalForm(UserID);
             addGoalForm.ShowDialog();
             Refresh_Listview();
         }
@@ -55,14 +56,12 @@ namespace FeedbackSysteem
             try
             {
                 goalRepo.DeleteGoal(SelectedGoalId);
-                string DeletedSubgoal = "deleted goal " + SelectedGoalId + "";
-                MessageBox.Show(DeletedSubgoal);
+                MessageBox.Show("Doel " + SelectedGoalId + " verwijderd");
                 Refresh_Listview();
             }
-            catch (Exception ex)
+            catch
             {
-                string failedDelete = "Failed to delete the goal!" + ex.Message;
-                MessageBox.Show(failedDelete);
+                MessageBox.Show("Kan doel niet verwijderen!");
             }
         }
 
@@ -79,8 +78,7 @@ namespace FeedbackSysteem
             try
             {
                 goalRepo.UpdateGoalStatus(SelectedGoalId, comboBox1.Text);
-                string UpdatedStatus = "status from goal " + SelectedGoalId + " updated";
-                MessageBox.Show(UpdatedStatus);
+                MessageBox.Show("status van doel " + SelectedGoalId + " geupdate");
                 Refresh_Listview();
                 if(comboBox1.Text == "afgerond")
                 {
@@ -88,10 +86,9 @@ namespace FeedbackSysteem
                     subGoalRepo.UpdateSubGoalStatus(SelectedGoalId, comboBox1.Text);
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                string failedDelete = "Failed to update the status!" + ex.Message;
-                MessageBox.Show(failedDelete);
+                MessageBox.Show("kan status niet updaten!");
             }
         }
 

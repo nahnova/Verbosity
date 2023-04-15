@@ -93,7 +93,7 @@ namespace FBS.Repository
                     cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
-                    cmd.CommandText = "SELECT id, firsName, lastName, email, gender,password FROM  WHERE id = @id";
+                    cmd.CommandText = "SELECT id, firstName, lastName, email, gender, password FROM Student WHERE id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
 
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
@@ -111,6 +111,32 @@ namespace FBS.Repository
                 }
             }
             return student;
+        }
+
+        public void UpdateStudent(int id, string firstName, string lastName, string email, string gender)
+        {
+            SqlConnection connection = new SqlConnection();
+            try
+            {
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
+                connection.Open();
+                string sql = "UPDATE Student SET firstName = @firstname,lastName = @lastName,email = @email,gender = @gender WHERE id = @id";
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@firstName", firstName);
+                    cmd.Parameters.AddWithValue("@lastName", lastName);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@gender", gender);
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally { connection.Dispose(); }
         }
     }   
 }
