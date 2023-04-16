@@ -54,9 +54,16 @@ This layer contains the WinForms forms, which make up the user interface of the 
 
 _TODO: Add instructions for installation and setup._
 
-## Usage
+## Usage:
 
-_TODO: Add instructions for using the application._
+1. Restore the database using the provided bak file located in the project root directory. This can be done by opening SQL Server Management Studio, right-clicking on the Databases folder and selecting "Restore Database", then selecting the .bak file and following the prompts to restore the database.
+
+2. Update the ConnectionString inside FBS.DataAccess with the appropriate server name and database name. This can be done by opening the FBS.DataAccess project in Visual Studio, opening the `/FBS.DataAccess/FeedbackCollection/FeedbackCollectionDBDataAccess.cs` file, and updating the `connectionString` property with the appropriate server name and database name.
+
+3. Install the SQL Server NuGet package by right-clicking on the solution in Visual Studio and selecting "Manage NuGet Packages...", then searching for and installing the `System.Data.SqlClient` package.
+
+4. Run the Windows Forms application called FeedbackSysteem by opening the Frontend project in Visual Studio, setting the startup project to FeedbackSysteem, and running the application. Once the application is running, you can log in as a teacher or a student and begin using the application to manage feedback and goals.
+
 
 ## Documentation
 
