@@ -25,18 +25,17 @@ namespace FBS.Repository
 
         public List<Student> students = new List<Student>();
         //Add Student
-        public void AddStudent(int iD, string firstName, string lastName, string email, string gender,string password)
+        public void AddStudent(string firstName, string lastName, string email, string gender,string password)
         {
             SqlConnection connection = new SqlConnection();
             try
             {
                 connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
-                string sql = "INSERT INTO Student (id,firstName,lastName,email,gender,password) VALUES(@id,@firstName,@lastName,@email,@gender,@password)";
+                string sql = "INSERT INTO Student (firstName,lastName,email,gender,password) VALUES(@firstName,@lastName,@email,@gender,@password)";
 
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
-                    cmd.Parameters.AddWithValue("@id", iD);
                     cmd.Parameters.AddWithValue("@firstName", firstName);
                     cmd.Parameters.AddWithValue("@lastName", lastName);
                     cmd.Parameters.AddWithValue("@email", email);

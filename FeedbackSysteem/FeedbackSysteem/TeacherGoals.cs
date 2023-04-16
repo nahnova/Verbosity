@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace FeedbackSysteem
 {
@@ -16,9 +17,12 @@ namespace FeedbackSysteem
     {
         public int SelectedGoalId { get; set; }
 
+        public int TeacherId { get; set; }
+
         public TeacherGoals(int id)
         {
             InitializeComponent();
+            TeacherId = id;
         }
         private void SelectStudent(object sender, EventArgs e)
         {
@@ -41,7 +45,7 @@ namespace FeedbackSysteem
 
         private void OpenSubGoals(object sender, EventArgs e)
         {
-            SubGoalsForm subGoalsForm = new SubGoalsForm(SelectedGoalId);
+            StudentSubGoalOverview subGoalsForm = new StudentSubGoalOverview(SelectedGoalId);
             subGoalsForm.ShowDialog();
         }
 
@@ -51,6 +55,12 @@ namespace FeedbackSysteem
             {
                 SelectedGoalId = Int32.Parse(listView1.SelectedItems[0].Text);
             }
+        }
+
+        private void OpenFeedbackForm(object sender, EventArgs e)
+        {
+            TeacherAddGoalFeedback teacherFeedbackForm = new TeacherAddGoalFeedback(TeacherId, Int32.Parse(textBox1.Text), SelectedGoalId);
+            teacherFeedbackForm.ShowDialog();
         }
     }
 }

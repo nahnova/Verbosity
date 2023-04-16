@@ -37,7 +37,6 @@
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
             columnHeader6 = new ColumnHeader();
-            button1 = new Button();
             textBox1 = new TextBox();
             label1 = new Label();
             button2 = new Button();
@@ -45,12 +44,13 @@
             // 
             // button5
             // 
-            button5.Location = new Point(517, 9);
+            button5.Location = new Point(666, 9);
             button5.Name = "button5";
             button5.Size = new Size(129, 29);
             button5.TabIndex = 17;
             button5.Text = "Feedback geven";
             button5.UseVisualStyleBackColor = true;
+            button5.Click += OpenFeedbackForm;
             // 
             // button4
             // 
@@ -65,9 +65,9 @@
             // listView1
             // 
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6 });
-            listView1.Location = new Point(12, 44);
+            listView1.Location = new Point(12, 45);
             listView1.Name = "listView1";
-            listView1.Size = new Size(783, 419);
+            listView1.Size = new Size(783, 453);
             listView1.TabIndex = 14;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -102,15 +102,6 @@
             columnHeader6.Text = "Status";
             columnHeader6.Width = 120;
             // 
-            // button1
-            // 
-            button1.Location = new Point(652, 9);
-            button1.Name = "button1";
-            button1.Size = new Size(140, 29);
-            button1.TabIndex = 18;
-            button1.Text = "Feedback openen";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // textBox1
             // 
             textBox1.Location = new Point(146, 11);
@@ -141,11 +132,10 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(807, 475);
+            ClientSize = new Size(807, 510);
             Controls.Add(button2);
             Controls.Add(label1);
             Controls.Add(textBox1);
-            Controls.Add(button1);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(listView1);
@@ -166,7 +156,6 @@
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
         private ColumnHeader columnHeader6;
-        private Button button1;
         private TextBox textBox1;
         private Label label1;
         private Button button2;

@@ -142,32 +142,5 @@ namespace FBS.Repository
             }
             finally { connection.Dispose(); }
         }
-
-        // Update Subgoal
-        public void UpdateSubGoalStatus(int goalId,string status)
-        {
-            SqlConnection connection = new SqlConnection();
-            try
-            {
-                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
-                connection.Open();
-                foreach (SubGoal subGoal in subGoals.Where(subGoal => subGoal.GoalID == goalId))
-                {
-                    string sql = "UPDATE SubGoal SET status = @status WHERE goalId = @goalId";
-                    using (SqlCommand cmd = new SqlCommand(sql, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@goalId", goalId);
-                        cmd.Parameters.AddWithValue("@status", status);
-                        cmd.ExecuteNonQuery();
-                    }
-                } 
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
-            finally { connection.Dispose(); }
-        }
     }   
 }

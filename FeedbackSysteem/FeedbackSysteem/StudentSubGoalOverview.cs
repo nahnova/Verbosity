@@ -13,11 +13,11 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace FeedbackSysteem
 {
-    public partial class SubGoalsForm : Form
+    public partial class StudentSubGoalOverview : Form
     {
         public int ID { get; set; }
         public int DeleteId { get; set; }
-        public SubGoalsForm(int Id)
+        public StudentSubGoalOverview(int Id)
         {
             InitializeComponent();
             ID = Id;

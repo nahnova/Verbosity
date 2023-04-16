@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace FeedbackSysteem
 {
-    public partial class ProfilePage : Form
+    public partial class StudentProfilePage : Form
     {
         public int StudentId { get; set; }
-        public ProfilePage(int id)
+        public StudentProfilePage(int id)
         {
             InitializeComponent();
 

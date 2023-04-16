@@ -1,6 +1,6 @@
 ﻿namespace FeedbackSysteem
 {
-    partial class SubGoalsForm
+    partial class StudentFeedbackOverview
     {
         /// <summary>
         /// Required designer variable.
@@ -29,97 +29,86 @@
         private void InitializeComponent()
         {
             listView1 = new ListView();
+            columnHeader0 = new ColumnHeader();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
-            button1 = new Button();
-            button2 = new Button();
-            textBox1 = new TextBox();
+            columnHeader5 = new ColumnHeader();
+            columnHeader6 = new ColumnHeader();
+            columnHeader7 = new ColumnHeader();
             SuspendLayout();
             // 
             // listView1
             // 
-            listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
-            listView1.Location = new Point(12, 95);
+            listView1.Columns.AddRange(new ColumnHeader[] { columnHeader0, columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6, columnHeader7 });
+            listView1.Location = new Point(10, 8);
             listView1.Name = "listView1";
-            listView1.Size = new Size(717, 413);
+            listView1.Size = new Size(1102, 592);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
-            listView1.SelectedIndexChanged += listView1_SelectedIndexChanged;
+            // 
+            // columnHeader0
+            // 
+            columnHeader0.Text = "Id";
+            columnHeader0.Width = 40;
             // 
             // columnHeader1
             // 
-            columnHeader1.Text = "SubdoelId";
-            columnHeader1.Width = 100;
+            columnHeader1.Text = "DocentID";
+            columnHeader1.Width = 80;
             // 
             // columnHeader2
             // 
-            columnHeader2.Text = "DoelId";
+            columnHeader2.Text = "StudentID";
+            columnHeader2.Width = 80;
             // 
             // columnHeader3
             // 
-            columnHeader3.Text = "Subdoel";
-            columnHeader3.Width = 470;
+            columnHeader3.Text = "Datum";
+            columnHeader3.Width = 110;
             // 
             // columnHeader4
             // 
-            columnHeader4.Text = "Status";
+            columnHeader4.Text = "Vak";
             columnHeader4.Width = 100;
             // 
-            // button1
+            // columnHeader5
             // 
-            button1.Location = new Point(347, 16);
-            button1.Name = "button1";
-            button1.Size = new Size(201, 29);
-            button1.TabIndex = 1;
-            button1.Text = "Subdoel toevoegen";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += CreateSubGoal;
+            columnHeader5.Text = "Feedback";
+            columnHeader5.Width = 525;
             // 
-            // button2
+            // columnHeader6
             // 
-            button2.Location = new Point(347, 51);
-            button2.Name = "button2";
-            button2.Size = new Size(201, 29);
-            button2.TabIndex = 2;
-            button2.Text = "Subdoel verwijderen";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += DeleteSubGoal;
+            columnHeader6.Text = "Type";
+            columnHeader6.Width = 100;
             // 
-            // textBox1
+            // columnHeader7
             // 
-            textBox1.Location = new Point(12, 12);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(329, 77);
-            textBox1.TabIndex = 3;
+            columnHeader7.Text = "DoelID";
             // 
-            // SubGoalsForm
+            // StudentFeedbackOverview
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(741, 520);
-            Controls.Add(textBox1);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            ClientSize = new Size(1117, 605);
             Controls.Add(listView1);
-            Name = "SubGoalsForm";
-            Text = "SubGoalsForm";
+            Name = "StudentFeedbackOverview";
+            Text = "StudentFeedbackForm";
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private ListView listView1;
-        private Button button1;
-        private Button button2;
-        private TextBox textBox1;
+        private ColumnHeader columnHeader0;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
+        private ColumnHeader columnHeader5;
+        private ColumnHeader columnHeader6;
+        private ColumnHeader columnHeader7;
     }
 }

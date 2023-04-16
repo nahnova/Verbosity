@@ -1,6 +1,6 @@
 ﻿namespace FeedbackSysteem
 {
-    partial class ProfilePage
+    partial class StudentProfilePage
     {
         /// <summary>
         /// Required designer variable.

@@ -1,6 +1,6 @@
 ﻿namespace FeedbackSysteem
 {
-    partial class Form1
+    partial class LoginForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -38,13 +38,12 @@
             label1 = new Label();
             button2 = new Button();
             textBox2 = new TextBox();
-            button3 = new Button();
             tabPage3 = new TabPage();
+            label6 = new Label();
+            label5 = new Label();
             textBox3 = new TextBox();
             button4 = new Button();
             textBox4 = new TextBox();
-            label5 = new Label();
-            label6 = new Label();
             tabControl2.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
@@ -70,7 +69,6 @@
             tabPage2.Controls.Add(label1);
             tabPage2.Controls.Add(button2);
             tabPage2.Controls.Add(textBox2);
-            tabPage2.Controls.Add(button3);
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
@@ -147,15 +145,6 @@
             textBox2.Size = new Size(134, 27);
             textBox2.TabIndex = 4;
             // 
-            // button3
-            // 
-            button3.Location = new Point(141, 274);
-            button3.Name = "button3";
-            button3.Size = new Size(134, 29);
-            button3.TabIndex = 2;
-            button3.Text = "Reset password";
-            button3.UseVisualStyleBackColor = true;
-            // 
             // tabPage3
             // 
             tabPage3.Controls.Add(label6);
@@ -170,6 +159,24 @@
             tabPage3.TabIndex = 1;
             tabPage3.Text = "Docent login";
             tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(42, 134);
+            label6.Name = "label6";
+            label6.Size = new Size(93, 20);
+            label6.TabIndex = 9;
+            label6.Text = "Wachtwoord";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(89, 101);
+            label5.Name = "label5";
+            label5.Size = new Size(46, 20);
+            label5.TabIndex = 8;
+            label5.Text = "Email";
             // 
             // textBox3
             // 
@@ -195,31 +202,13 @@
             textBox4.Size = new Size(134, 27);
             textBox4.TabIndex = 7;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(89, 101);
-            label5.Name = "label5";
-            label5.Size = new Size(46, 20);
-            label5.TabIndex = 8;
-            label5.Text = "Email";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(42, 134);
-            label6.Name = "label6";
-            label6.Size = new Size(93, 20);
-            label6.TabIndex = 9;
-            label6.Text = "Wachtwoord";
-            // 
-            // Form1
+            // LoginForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(419, 427);
+            ClientSize = new Size(419, 341);
             Controls.Add(tabControl2);
-            Name = "Form1";
+            Name = "LoginForm";
             Text = "Form1";
             tabControl2.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
@@ -238,7 +227,6 @@
         private Label label1;
         private Button button2;
         private TextBox textBox2;
-        private Button button3;
         private TabPage tabPage3;
         private Label label4;
         private Label label2;

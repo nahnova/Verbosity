@@ -4,10 +4,10 @@ using FBS.Repository;
 
 namespace FeedbackSysteem
 {
-    public partial class AddGoalForm : Form
+    public partial class StudentAddGoalForm : Form
     {
         public int UserID { get; set; }
-        public AddGoalForm(int id)
+        public StudentAddGoalForm(int id)
         {
             InitializeComponent();
             UserID = id;

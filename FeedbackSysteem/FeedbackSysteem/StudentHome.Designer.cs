@@ -1,6 +1,6 @@
 ﻿namespace FeedbackSysteem
 {
-    partial class Home
+    partial class StudentHome
     {
         /// <summary>
         /// Required designer variable.
@@ -52,7 +52,7 @@
             button2.TabIndex = 2;
             button2.Text = "Doelen";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            button2.Click += GoToGoalOverview;
             // 
             // button3
             // 
@@ -62,6 +62,7 @@
             button3.TabIndex = 3;
             button3.Text = "Feedback";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += GoToFeedbackOverview;
             // 
             // pictureBox1
             // 
@@ -72,9 +73,9 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            pictureBox1.Click += GoToProfilePage;
             // 
-            // Home
+            // StudentHome
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -83,7 +84,7 @@
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
-            Name = "Home";
+            Name = "StudentHome";
             Text = "Home";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

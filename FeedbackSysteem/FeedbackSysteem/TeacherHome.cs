@@ -21,16 +21,22 @@ namespace FeedbackSysteem
             TeacherID = id;
         }
 
-        private void OpenStudentGoals(object sender, EventArgs e)
+        private void GoToTeacherGoals(object sender, EventArgs e)
         {
             TeacherGoals teacherGoals = new TeacherGoals(TeacherID);
             teacherGoals.ShowDialog();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void GoToTeacherProfilePage(object sender, EventArgs e)
         {
             TeacherProfilePage teacherProfilePage = new TeacherProfilePage(TeacherID);
             teacherProfilePage.ShowDialog();
+        }
+
+        private void GoToFeedbackOverview(object sender, EventArgs e)
+        {
+            TeacherFeedbackOverview teacherFeedbackOverview = new TeacherFeedbackOverview(TeacherID);
+            teacherFeedbackOverview.ShowDialog();
         }
     }
 }

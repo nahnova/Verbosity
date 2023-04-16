@@ -7,7 +7,7 @@ using FBS.Repository;
 
 namespace FeedbackSysteem
 {
-    public partial class Form1 : Form
+    public partial class LoginForm : Form
     {
         SqlCommand cmd;
         SqlDataReader dr;
@@ -17,10 +17,12 @@ namespace FeedbackSysteem
 
         private FeedbackCollectionDBDataAccess iDB { get; set; }
 
-        public Form1()
+        public LoginForm()
         {
             InitializeComponent();
             this.iDB = new FeedbackCollectionDBDataAccess();
+            textBox2.PasswordChar = '*';
+            textBox4.PasswordChar = '*';
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -40,7 +42,7 @@ namespace FeedbackSysteem
                     UserID = Convert.ToInt32(dr["id"]);
                     dr.Close();
                     this.Hide();
-                    Home home = new Home(UserID);
+                    StudentHome home = new StudentHome(UserID);
                     home.ShowDialog();
                 }
                 else

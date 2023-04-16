@@ -5,12 +5,12 @@ using FBS.Repository;
 
 namespace FeedbackSysteem
 {
-    public partial class GoalForm : Form
+    public partial class StudentGoalOverview : Form
     {
         public int UserID { get; set; }
         public int SelectedGoalId { get; set; }
 
-        public GoalForm(int id)
+        public StudentGoalOverview(int id)
         {
             InitializeComponent();
             UserID = id;
@@ -45,7 +45,7 @@ namespace FeedbackSysteem
 
         private void CreateGoal(object sender, EventArgs e)
         {
-            AddGoalForm addGoalForm = new AddGoalForm(UserID);
+            StudentAddGoalForm addGoalForm = new StudentAddGoalForm(UserID);
             addGoalForm.ShowDialog();
             Refresh_Listview();
         }
@@ -67,7 +67,7 @@ namespace FeedbackSysteem
 
         private void OpenSubGoals(object sender, EventArgs e)
         {
-            SubGoalsForm subGoalsForm = new SubGoalsForm(SelectedGoalId);
+            StudentSubGoalOverview subGoalsForm = new StudentSubGoalOverview(SelectedGoalId);
             subGoalsForm.ShowDialog();
             Refresh_Listview();
         }
@@ -80,11 +80,6 @@ namespace FeedbackSysteem
                 goalRepo.UpdateGoalStatus(SelectedGoalId, comboBox1.Text);
                 MessageBox.Show("status van doel " + SelectedGoalId + " geupdate");
                 Refresh_Listview();
-                if(comboBox1.Text == "afgerond")
-                {
-                    SubGoalRepo subGoalRepo = new SubGoalRepo();
-                    subGoalRepo.UpdateSubGoalStatus(SelectedGoalId, comboBox1.Text);
-                }
             }
             catch
             {
@@ -99,6 +94,5 @@ namespace FeedbackSysteem
                 SelectedGoalId = Int32.Parse(listView1.SelectedItems[0].Text);
             }
         }
-
     }
 }

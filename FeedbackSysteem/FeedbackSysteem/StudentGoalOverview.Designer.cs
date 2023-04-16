@@ -1,6 +1,6 @@
 ﻿namespace FeedbackSysteem
 {
-    partial class GoalForm
+    partial class StudentGoalOverview
     {
         /// <summary>
         /// Required designer variable.

@@ -44,7 +44,7 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            pictureBox1.Click += GoToTeacherProfilePage;
             // 
             // button3
             // 
@@ -54,6 +54,7 @@
             button3.TabIndex = 7;
             button3.Text = "Feedback";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += GoToFeedbackOverview;
             // 
             // button2
             // 
@@ -63,7 +64,7 @@
             button2.TabIndex = 6;
             button2.Text = "Doelen";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += OpenStudentGoals;
+            button2.Click += GoToTeacherGoals;
             // 
             // button1
             // 
