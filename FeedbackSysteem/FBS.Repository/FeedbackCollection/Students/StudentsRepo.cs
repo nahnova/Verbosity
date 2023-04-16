@@ -25,18 +25,17 @@ namespace FBS.Repository
 
         public List<Student> students = new List<Student>();
         //Add Student
-        public void AddStudent(int iD, string firstName, string lastName, string email, string gender,string password)
+        public void AddStudent(string firstName, string lastName, string email, string gender,string password)
         {
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
-                string sql = "INSERT INTO Student (id,firstName,lastName,email,gender,password) VALUES(@id,@firstName,@lastName,@email,@gender,@password)";
+                string sql = "INSERT INTO Student (firstName,lastName,email,gender,password) VALUES(@firstName,@lastName,@email,@gender,@password)";
 
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
-                    cmd.Parameters.AddWithValue("@id", iD);
                     cmd.Parameters.AddWithValue("@firstName", firstName);
                     cmd.Parameters.AddWithValue("@lastName", lastName);
                     cmd.Parameters.AddWithValue("@email", email);
@@ -55,11 +54,11 @@ namespace FBS.Repository
         {
             students.Clear();
 
-            using (SqlConnection cnn = new SqlConnection(connectionString))
+            using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cnn.ConnectionString = connectionString;
+                    cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
                     cmd.CommandText = "SELECT id, firstName, lastName, email,gender,password FROM Student ORDER BY id";
@@ -86,14 +85,14 @@ namespace FBS.Repository
         {
             Student student = new Student(0, "", "", "", "", "");
 
-            using (SqlConnection cnn = new SqlConnection(connectionString))
+            using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cnn.ConnectionString = connectionString;
+                    cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
-                    cmd.CommandText = "SELECT id, firsName, lastName, email, gender,password FROM  WHERE id = @id";
+                    cmd.CommandText = "SELECT id, firstName, lastName, email, gender, password FROM Student WHERE id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
 
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
@@ -111,6 +110,32 @@ namespace FBS.Repository
                 }
             }
             return student;
+        }
+
+        public void UpdateStudent(int id, string firstName, string lastName, string email, string gender)
+        {
+            SqlConnection connection = new SqlConnection();
+            try
+            {
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
+                connection.Open();
+                string sql = "UPDATE Student SET firstName = @firstname,lastName = @lastName,email = @email,gender = @gender WHERE id = @id";
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@firstName", firstName);
+                    cmd.Parameters.AddWithValue("@lastName", lastName);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@gender", gender);
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally { connection.Dispose(); }
         }
     }   
 }

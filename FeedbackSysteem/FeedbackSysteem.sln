@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FBS.Entity", "FBS.Entity\FB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FBS.Repository", "FBS.Repository\FBS.Repository.csproj", "{EA6E6A23-9686-4593-90CC-5463100B2BB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FBS.Testing", "FBS.Testing\FBS.Testing.csproj", "{6D1AA345-82DE-4AC4-B11E-D986C2AECFBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{EA6E6A23-9686-4593-90CC-5463100B2BB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA6E6A23-9686-4593-90CC-5463100B2BB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA6E6A23-9686-4593-90CC-5463100B2BB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D1AA345-82DE-4AC4-B11E-D986C2AECFBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D1AA345-82DE-4AC4-B11E-D986C2AECFBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D1AA345-82DE-4AC4-B11E-D986C2AECFBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D1AA345-82DE-4AC4-B11E-D986C2AECFBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

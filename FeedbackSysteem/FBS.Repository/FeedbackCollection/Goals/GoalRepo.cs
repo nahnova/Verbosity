@@ -28,22 +28,22 @@ namespace FBS.Repository
 
 
         //Add Goal
-        public void AddGoal(int id, int studentId, string priority, string goal, string time)
+        public void AddGoal(int studentId, string priority, string goal, string time, string status)
         {
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
-                string sql = "INSERT INTO Goal (id,studentID,priority,goal,time) VALUES(@id,@studentID,@priority,@goal,@time)";
+                string sql = "INSERT INTO Goal (studentID,priority,goal,time,status) VALUES(@studentID,@priority,@goal,@time,@status)";
 
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@studentID", studentId);
                     cmd.Parameters.AddWithValue("@priority", priority);
                     cmd.Parameters.AddWithValue("@goal", goal);
                     cmd.Parameters.AddWithValue("@time", time);
+                    cmd.Parameters.AddWithValue("@status", status);
                     cmd.ExecuteNonQuery();
                 }
                 connection.Close();
@@ -53,18 +53,19 @@ namespace FBS.Repository
         }
 
         /*==========Get the list of goals from the database==========*/
-        public void GetGoalsFromDatabase()
+        public void GetGoalsFromDatabase(int studentID)
         {
             goals.Clear();
 
-            using (SqlConnection cnn = new SqlConnection(connectionString))
+            using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cnn.ConnectionString = connectionString;
+                    cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
-                    cmd.CommandText = "SELECT id,studentID,priority,goal,time FROM Goal ORDER BY id";
+                    cmd.CommandText = "SELECT id,studentID,priority,goal,time,status FROM Goal WHERE studentID = @studentID";
+                    cmd.Parameters.AddWithValue("@studentID", studentID);
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
                         while (dataReader.Read())
@@ -74,7 +75,8 @@ namespace FBS.Repository
                             Int32.Parse(dataReader[1].ToString()),  // set the CategoryID property of the Goal object to the second value in the dataReader array, converted to an integer
                             dataReader[2].ToString(),               // set the Description property of the Goal object to the third value in the dataReader array, as a string
                             dataReader[3].ToString(),               // set the CompletionDate property of the Goal object to the fourth value in the dataReader array, as a string
-                            dataReader[4].ToString()                // set the Completed property of the Goal object to the fifth value in the dataReader array, as a string, which will be converted to a boolean value later
+                            dataReader[4].ToString(),               // set the Completed property of the Goal object to the fifth value in the dataReader array, as a string, which will be converted to a boolean value later
+                            dataReader[5].ToString()                
                             ));
                         }
                     }
@@ -85,13 +87,13 @@ namespace FBS.Repository
         /*==========Get a single goal from the database==========*/
         public Goal GetSingleGoalByID(int id)
         {
-            Goal goal = new Goal(0, 0, "", "", "");
+            Goal goal = new Goal(0, 0, "", "", "", "");
 
-            using (SqlConnection cnn = new SqlConnection(connectionString))
+            using (SqlConnection cnn = new SqlConnection(iDB.Sqlcon.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cnn.ConnectionString = connectionString;
+                    cnn.ConnectionString = iDB.Sqlcon.ConnectionString;
                     cnn.Open();
                     cmd.Connection = cnn;
                     cmd.CommandText = "SELECT id,studentID,priority,goal,time FROM Goal WHERE id = @id";
@@ -102,10 +104,11 @@ namespace FBS.Repository
                         while (dataReader.Read())
                         {
                             goal.ID = Int32.Parse(dataReader[0].ToString());
-                            goal.studentID = Int32.Parse(dataReader[1].ToString());
-                            goal.priority = dataReader[2].ToString();
-                            goal.goal = dataReader[3].ToString();
-                            goal.time = dataReader[4].ToString();
+                            goal.StudentID = Int32.Parse(dataReader[1].ToString());
+                            goal.Priority = dataReader[2].ToString();
+                            goal.CreatedGoal = dataReader[3].ToString();
+                            goal.Time = dataReader[4].ToString();
+                            goal.Status = dataReader[5].ToString();
                         }
                     }
                 }
@@ -119,7 +122,7 @@ namespace FBS.Repository
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
                 string sql = "DELETE Goal WHERE id = @id";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
@@ -137,21 +140,18 @@ namespace FBS.Repository
         }
 
         // Update Goal
-        public void UpdateGoal(int id, int studentId, string priority, string goal, string time)
+        public void UpdateGoalStatus(int id, string status)
         {
             SqlConnection connection = new SqlConnection();
             try
             {
-                connection.ConnectionString = connectionString;
+                connection.ConnectionString = iDB.Sqlcon.ConnectionString;
                 connection.Open();
-                string sql = "UPDATE Goal SET id = @id,studentID= @studentID,priority = @priority,goal= @goal,time = @time WHERE id = @id";
+                string sql = "UPDATE Goal SET status = @status WHERE id = @id";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@studentID", studentId);
-                    cmd.Parameters.AddWithValue("@priority", priority);
-                    cmd.Parameters.AddWithValue("@goal", goal);
-                    cmd.Parameters.AddWithValue("@time", time);
+                    cmd.Parameters.AddWithValue("@status", status);
                     cmd.ExecuteNonQuery();
                 }
                 connection.Close();
