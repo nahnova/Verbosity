@@ -5,7 +5,7 @@
 
 Verbosity is an open-source WinForms application built with .NET, designed to help teachers and students communicate effectively by managing feedback and tracking goals. Teachers can leave feedback for students, while students can register goals and subgoals to improve their learning experience.
 
-![Verbosity Screenshot](./screenshot.png)
+[Explanation Video / Pitch](https://www.example.com)
 
 ## Table of Contents
 
