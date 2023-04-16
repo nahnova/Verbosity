@@ -33,6 +33,7 @@ The project is built using the N-Tier architecture, which allows for a scalable,
 2. `FBS.Repository`: Includes all SQL statements that interact with the SQL Server.
 3. `FBS.DataAccess`: Data access layer containing the connection string for the database.
 4. `Frontend`: Contains the WinForms forms for the user interface.
+5. `FBS.Testing`: Contains a console app to test the SQL connection.
 
 ### FBS.Entity
 
@@ -50,9 +51,17 @@ The data access layer is responsible for managing the connection with the SQL Se
 
 This layer contains the WinForms forms, which make up the user interface of the application. The forms provide a user-friendly interface for teachers and students to manage feedback, goals, and subgoals.
 
-## Installation
+## FBS.Testing
+This layer contains a console app to test the SQL connection.
 
-_TODO: Add instructions for installation and setup._
+## Installation:
+
+1. Clone or download the project to your local machine.
+2. Open the solution file in Visual Studio.
+3. Restore the database using the provided bak file located in the project root directory. This can be done by opening SQL Server Management Studio, right-clicking on the Databases folder and selecting "Restore Database", then selecting the .bak file and following the prompts to restore the database.
+2. Update the ConnectionString inside FBS.DataAccess with the appropriate server name and database name. This can be done by opening the FBS.DataAccess project in Visual Studio, opening the `/FBS.DataAccess/FeedbackCollection/FeedbackCollectionDBDataAccess.cs` file, and updating the `connectionString` property with the appropriate server name and database name.
+5. Install the SQL Server NuGet package by right-clicking on the solution in Visual Studio and selecting "Manage NuGet Packages...", then searching for and installing the `System.Data.SqlClient` package.
+6. Build the solution in Visual Studio.
 
 ## Usage:
 
