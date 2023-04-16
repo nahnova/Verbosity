@@ -1,29 +1,41 @@
 ﻿using System;
 
+// This class represents feedback given by a student to a teacher about a course.
 public class Feedback
 {
-	public int ID { get; set; }
+    // The ID of the feedback.
+    public int ID { get; set; }
 
+    // The teacher who received the feedback.
+    public int TeacherID { get; set; }
+
+    // The student who provided the feedback.
+    public int StudentID { get; set; }
+
+    // The date the feedback was given.
     public DateTime Date { get; set; }
 
+    // The name of the course for which the feedback was given.
     public string Course { get; set; }
 
-	public string Feedback { get; set; }
+    // The feedback text provided by the student.
+    public string GivenFeedback { get; set; }
 
-	public string Type { get; set; }
+    // The type of feedback, e.g. "positive", "negative", "suggestion", etc.
+    public string Type { get; set; }
 
-	public Teacher SingleTeacher { get; set; }
+    public int GoalID { get; set; }
 
-	public Student SingleStudent { get; set; }
-
-	public Feedback(int iD, DateTime date, string course, string feedback, string type, Teacher teacher, Student student )
-	{
-		ID = iD;
-		Date = date;
-		Course = course;
-		Feedback = feedback;
-		Type = type;
-		SingleTeacher = teacher;
-		SingleStudent = student;
-	}
+    // Creates a new instance of Feedback with the given properties.
+    public Feedback(int iD, int teacherID, int studentID, DateTime date, string course, string feedback, string type, int goalID)
+    {
+        ID = iD;
+        TeacherID = teacherID;
+        StudentID = studentID;
+        Date = date;
+        Course = course;
+        GivenFeedback = feedback;
+        Type = type;
+        GoalID = goalID;
+    }
 }
